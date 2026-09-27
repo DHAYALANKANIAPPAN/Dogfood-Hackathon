@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import auth
+import api
 
 app = FastAPI(
     title="Dogfood Hackathon API",
@@ -15,6 +17,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Register Routers
+app.include_router(auth.router)
+app.include_router(api.router)
 
 @app.get("/")
 def read_root():
