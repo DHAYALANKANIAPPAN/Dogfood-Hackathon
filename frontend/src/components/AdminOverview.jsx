@@ -54,50 +54,45 @@ export default function AdminOverview({ users = [], projects = [] }) {
     { name: 'Submitted', count: projects.filter(p => !p.is_draft).length },
     { name: 'Drafts', count: projects.filter(p => p.is_draft).length }
   ];
-
   const COLORS = ['#00f0ff', '#ff003c', '#00ff66'];
 
   return (
-    <div className="bg-white/[0.02] border border-white/[0.05] rounded-3xl p-8 mt-8 animate-in fade-in slide-in-from-bottom-4">
-      <h2 className="text-2xl font-heading font-semibold mb-6 text-white flex items-center gap-3">
-        <Activity className="w-6 h-6 text-primary-400" /> 
+    <div className="mt-12 animate-in fade-in slide-in-from-bottom-4">
+      <h2 className="text-4xl font-heading font-light mb-12 text-slate-900 flex items-center gap-4">
+        <Activity className="w-10 h-10 text-primary-600" /> 
         System Analytics
       </h2>
       
-      {/* Top Stat Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <div className="bg-white/[0.03] p-6 rounded-2xl border border-white/[0.05]">
-          <p className="text-zinc-400 text-sm font-medium uppercase tracking-wider">Total Projects</p>
-          <div className="mt-4 flex items-end justify-between">
-            <p className="text-5xl font-heading font-semibold text-white">{projects.length}</p>
-          </div>
+      {/* Top Stat Text (No Cards) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 border-t border-b border-slate-200 py-12">
+        <div className="flex flex-col">
+          <p className="text-sm font-semibold text-slate-400 uppercase tracking-widest">Total Projects</p>
+          <p className="text-7xl font-heading font-light text-slate-900 mt-4">{projects.length}</p>
         </div>
         
-        <div className="bg-white/[0.03] p-6 rounded-2xl border border-white/[0.05]">
-          <p className="text-zinc-400 text-sm font-medium uppercase tracking-wider">Total Users</p>
-          <div className="mt-4 flex items-end justify-between">
-            <p className="text-5xl font-heading font-semibold text-white">{users.length}</p>
-          </div>
+        <div className="flex flex-col border-l border-slate-200 pl-12">
+          <p className="text-sm font-semibold text-slate-400 uppercase tracking-widest">Total Users</p>
+          <p className="text-7xl font-heading font-light text-slate-900 mt-4">{users.length}</p>
         </div>
         
-        <div className="bg-white/[0.03] p-6 rounded-2xl border border-white/[0.05]">
-          <p className="text-zinc-400 text-sm font-medium uppercase tracking-wider">System Status</p>
-          <div className="mt-4 flex flex-col gap-1">
-            <p className="text-2xl font-semibold text-green-400 flex items-center gap-2">
-              <CheckCircle2 className="w-6 h-6" /> Online
+        <div className="flex flex-col border-l border-slate-200 pl-12">
+          <p className="text-sm font-semibold text-slate-400 uppercase tracking-widest">System Status</p>
+          <div className="mt-4">
+            <p className="text-5xl font-light text-green-500 flex items-center gap-3">
+              <CheckCircle2 className="w-10 h-10" /> Online
             </p>
-            <p className="text-xs text-zinc-500 mt-2">All services operational</p>
+            <p className="text-sm font-medium text-slate-400 mt-4">All services operational</p>
           </div>
         </div>
       </div>
 
-      {/* Analytics Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+      {/* Analytics Charts (No Containers) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
         
         {/* User Distribution Pie Chart */}
-        <div className="bg-white/[0.02] p-6 rounded-2xl border border-white/[0.05]">
-          <h3 className="text-sm font-medium text-zinc-400 uppercase tracking-wider mb-6 text-center">User Roles Distribution</h3>
-          <div className="h-[250px]">
+        <div className="flex flex-col">
+          <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-8">User Roles Distribution</h3>
+          <div className="h-[300px]">
             {roleData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -105,8 +100,8 @@ export default function AdminOverview({ users = [], projects = [] }) {
                     data={roleData}
                     cx="50%"
                     cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
+                    innerRadius={80}
+                    outerRadius={100}
                     paddingAngle={5}
                     dataKey="value"
                     stroke="none"
@@ -116,30 +111,30 @@ export default function AdminOverview({ users = [], projects = [] }) {
                     ))}
                   </Pie>
                   <RechartsTooltip 
-                    contentStyle={{ backgroundColor: 'rgba(20,20,20,0.9)', borderColor: 'rgba(255,255,255,0.1)', color: '#fff', borderRadius: '8px' }}
-                    itemStyle={{ color: '#fff' }}
+                    contentStyle={{ backgroundColor: 'rgba(255,255,255,0.9)', borderColor: 'rgba(0,0,0,0.1)', color: '#000', borderRadius: '0px' }}
+                    itemStyle={{ color: '#000' }}
                   />
                 </PieChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-full flex items-center justify-center text-zinc-500 text-sm">No user data</div>
+              <div className="h-full flex items-center justify-center text-slate-400 text-sm font-medium">No user data</div>
             )}
           </div>
           {/* Legend */}
-          <div className="flex justify-center gap-6 mt-4">
+          <div className="flex justify-start gap-8 mt-6">
             {roleData.map((entry, index) => (
-              <div key={entry.name} className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
-                <span className="text-xs text-zinc-400 font-medium">{entry.name}</span>
+              <div key={entry.name} className="flex items-center gap-3">
+                <div className="w-2 h-2" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
+                <span className="text-sm text-slate-600 font-medium uppercase tracking-wider">{entry.name}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Project Status Bar Chart */}
-        <div className="bg-white/[0.02] p-6 rounded-2xl border border-white/[0.05]">
-          <h3 className="text-sm font-medium text-zinc-400 uppercase tracking-wider mb-6 text-center">Project Status</h3>
-          <div className="h-[250px]">
+        <div className="flex flex-col">
+          <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-8">Project Status</h3>
+          <div className="h-[300px]">
             {projects.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={projectStatusData} margin={{ top: 20, right: 30, left: -20, bottom: 0 }}>
@@ -147,10 +142,10 @@ export default function AdminOverview({ users = [], projects = [] }) {
                   <XAxis dataKey="name" stroke="#a1a1aa" tick={{ fill: '#a1a1aa', fontSize: 12 }} />
                   <YAxis stroke="#a1a1aa" tick={{ fill: '#a1a1aa', fontSize: 12 }} allowDecimals={false} />
                   <RechartsTooltip 
-                    cursor={{ fill: 'rgba(255,255,255,0.05)' }}
-                    contentStyle={{ backgroundColor: 'rgba(20,20,20,0.9)', borderColor: 'rgba(255,255,255,0.1)', color: '#fff', borderRadius: '8px' }}
+                    cursor={{ fill: 'rgba(0,0,0,0.02)' }}
+                    contentStyle={{ backgroundColor: 'rgba(255,255,255,0.9)', borderColor: 'rgba(0,0,0,0.1)', color: '#000', borderRadius: '0px' }}
                   />
-                  <Bar dataKey="count" radius={[4, 4, 0, 0]} maxBarSize={60}>
+                  <Bar dataKey="count" radius={[0, 0, 0, 0]} maxBarSize={60}>
                     {projectStatusData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={index === 0 ? COLORS[0] : COLORS[1]} />
                     ))}
@@ -158,7 +153,7 @@ export default function AdminOverview({ users = [], projects = [] }) {
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-full flex items-center justify-center text-zinc-500 text-sm">No project data</div>
+              <div className="h-full flex items-center justify-center text-slate-400 text-sm font-medium">No project data</div>
             )}
           </div>
         </div>
@@ -166,24 +161,24 @@ export default function AdminOverview({ users = [], projects = [] }) {
       </div>
 
       {/* Admin Actions */}
-      <div className="pt-8 border-t border-white/10">
-        <h3 className="text-sm font-medium text-zinc-400 uppercase tracking-wider mb-6">Execution Commands</h3>
-        <div className="flex flex-wrap gap-4">
+      <div className="pt-12 border-t border-slate-200">
+        <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-8">Execution Commands</h3>
+        <div className="flex flex-wrap gap-6">
           <button 
             onClick={handleExportCSV}
             disabled={isExporting}
-            className="px-6 py-3 bg-white/[0.05] hover:bg-white/[0.1] text-white border border-white/10 rounded-xl text-sm font-medium transition-all flex items-center gap-2 disabled:opacity-70"
+            className="px-8 py-4 bg-transparent hover:bg-slate-100 text-slate-900 border-2 border-slate-900 text-sm font-bold uppercase tracking-widest transition-all flex items-center gap-3 disabled:opacity-70"
           >
-            <Download className={`w-4 h-4 ${isExporting ? 'animate-bounce' : ''}`} /> 
+            <Download className={`w-5 h-5 ${isExporting ? 'animate-bounce' : ''}`} /> 
             {isExporting ? 'Exporting...' : 'Export Data (CSV)'}
           </button>
 
           <button 
             onClick={handleRunAlgorithm}
             disabled={isRunning}
-            className="px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white rounded-xl text-sm font-medium transition-all flex items-center gap-2 disabled:opacity-70"
+            className="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white border-2 border-primary-600 text-sm font-bold uppercase tracking-widest transition-all flex items-center gap-3 disabled:opacity-70"
           >
-            <CheckCircle2 className={`w-4 h-4 ${isRunning ? 'animate-pulse' : ''}`} /> 
+            <CheckCircle2 className={`w-5 h-5 ${isRunning ? 'animate-pulse' : ''}`} /> 
             {isRunning ? 'Running...' : 'Run Judging Algorithm'}
           </button>
         </div>

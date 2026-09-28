@@ -19,14 +19,14 @@ export default function Challenges() {
   }, []);
 
   if (loading) {
-    return <div className="p-12 text-center text-zinc-500">Loading problem statements...</div>;
+    return <div className="p-12 text-center text-slate-500">Loading problem statements...</div>;
   }
 
   if (problems.length === 0) {
     return (
       <div className="max-w-4xl mx-auto px-6 py-12 text-center">
-        <h1 className="text-3xl font-heading font-bold text-white mb-4">No Problem Statements Yet</h1>
-        <p className="text-zinc-400">The admins have not released any problem statements.</p>
+        <h1 className="text-3xl font-heading font-bold text-slate-900 mb-4">No Problem Statements Yet</h1>
+        <p className="text-slate-600">The admins have not released any problem statements.</p>
       </div>
     );
   }
@@ -34,21 +34,21 @@ export default function Challenges() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-12 space-y-12">
       {problems.map((problem) => (
-        <div key={problem.id} className="bg-white/[0.02] border border-white/[0.05] rounded-3xl p-8 md:p-12 shadow-2xl">
-          <h1 className="text-4xl font-heading font-bold mb-6 text-white">
+        <div key={problem.id} className="bg-white border border-slate-200 rounded-3xl p-8 md:p-12 shadow-2xl">
+          <h1 className="text-4xl font-heading font-bold mb-6 text-slate-900">
             {problem.title}
           </h1>
           
           <div className="flex items-center gap-3 mb-8">
-            <span className="px-3 py-1 bg-primary-500/10 text-primary-400 text-xs font-semibold uppercase tracking-wider rounded-md border border-primary-500/20">
+            <span className="px-3 py-1 bg-primary-500/10 text-primary-600 text-xs font-semibold uppercase tracking-wider rounded-md border border-primary-500/20">
               Main Track
             </span>
-            <span className="px-3 py-1 bg-white/5 text-zinc-400 text-xs font-semibold uppercase tracking-wider rounded-md border border-white/10">
+            <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-semibold uppercase tracking-wider rounded-md border border-slate-200">
               {new Date(problem.created_at).toLocaleDateString()}
             </span>
           </div>
 
-          <div className="space-y-8 text-zinc-300 text-lg leading-relaxed whitespace-pre-wrap">
+          <div className="space-y-8 text-slate-700 text-lg leading-relaxed whitespace-pre-wrap">
             {problem.description}
           </div>
         </div>

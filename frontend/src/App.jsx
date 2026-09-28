@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import PublicUsers from './pages/PublicUsers';
 import PublicTeams from './pages/PublicTeams';
 import Challenges from './pages/Challenges';
+import AnimatedDog from './components/AnimatedDog';
 
 function App() {
   // Global mock state for the current logged-in role
@@ -24,8 +25,14 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-[#111] text-white font-sans overflow-x-hidden">
-        <Navbar role={role} onLogout={handleLogout} />
+      <div className="min-h-screen bg-slate-50 text-slate-900 font-sans overflow-x-hidden relative">
+        {/* Universal Animated Dog Background */}
+        <div className="fixed inset-0 z-0 flex items-center justify-center opacity-[0.03] pointer-events-none scale-[1.5] sm:scale-[2] md:scale-[2.5]">
+          <AnimatedDog />
+        </div>
+
+        <div className="relative z-10 flex flex-col min-h-screen">
+          <Navbar role={role} onLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<Home role={role} />} />
           <Route path="/auth" element={!role ? <Auth setRole={setRole} /> : <Navigate to="/dashboard" replace />} />
@@ -42,6 +49,7 @@ function App() {
           
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        </div>
       </div>
     </Router>
   );

@@ -64,27 +64,27 @@ export default function Dashboard({ role, setRole }) {
           className="mb-12 glass-panel p-8 md:p-12 relative rounded-3xl"
         >
           <div className="relative z-10 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-500/10 text-primary-400 text-xs font-medium rounded-full border border-primary-500/20 mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-500/10 text-primary-600 text-xs font-medium rounded-full border border-primary-500/20 mb-6">
               <div className="w-2 h-2 rounded-full bg-primary-400 animate-pulse" /> Live Event Active
             </div>
-            <h1 className="text-4xl md:text-5xl font-heading font-semibold mb-4 text-white">Event Dashboard</h1>
-            <p className="text-lg text-zinc-400 mb-8 leading-relaxed max-w-2xl">
+            <h1 className="text-4xl md:text-5xl font-heading font-semibold mb-4 text-slate-900">Event Dashboard</h1>
+            <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-2xl">
               Welcome to the central hub for the Dogfood 2026 Hackathon. Manage your projects, teams, and judging assignments here.
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <div className="flex items-center gap-3 bg-white/[0.03] rounded-2xl px-5 py-4 border border-white/[0.05]">
-                <Calendar className="w-5 h-5 text-primary-400" />
+              <div className="flex items-center gap-3 bg-slate-50 rounded-2xl px-5 py-4 border border-slate-200">
+                <Calendar className="w-5 h-5 text-primary-600" />
                 <div>
-                  <p className="text-[11px] text-zinc-500 font-medium uppercase tracking-wider">Time Remaining</p>
-                  <p className="font-semibold text-zinc-200">72 Hours</p>
+                  <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Time Remaining</p>
+                  <p className="font-semibold text-slate-800">72 Hours</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 bg-white/[0.03] rounded-2xl px-5 py-4 border border-white/[0.05]">
-                <MapPin className="w-5 h-5 text-primary-400" />
+              <div className="flex items-center gap-3 bg-slate-50 rounded-2xl px-5 py-4 border border-slate-200">
+                <MapPin className="w-5 h-5 text-primary-600" />
                 <div>
-                  <p className="text-[11px] text-zinc-500 font-medium uppercase tracking-wider">Location</p>
-                  <p className="font-semibold text-zinc-200">Silicon Valley Campus</p>
+                  <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Location</p>
+                  <p className="font-semibold text-slate-800">Silicon Valley Campus</p>
                 </div>
               </div>
             <div className="flex flex-wrap gap-4 mt-6">
@@ -111,40 +111,40 @@ export default function Dashboard({ role, setRole }) {
           >
             {role === 'admin' && (
               <div>
-                <div className="flex gap-2 mb-8 bg-white/[0.03] p-1.5 rounded-2xl border border-white/[0.05] w-fit">
+                <div className="flex gap-2 mb-8 bg-slate-50 p-1.5 rounded-2xl border border-slate-200 w-fit">
                   <button 
                     onClick={() => setAdminTab('overview')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'overview' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'overview' ? 'bg-slate-200 text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'}`}
                   >
                     System Overview
                   </button>
                   <button 
                     onClick={() => setAdminTab('config')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'config' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'config' ? 'bg-slate-200 text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'}`}
                   >
                     Event Config
                   </button>
                   <button 
                     onClick={() => setAdminTab('users')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'users' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'users' ? 'bg-slate-200 text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'}`}
                   >
                     Manage Users
                   </button>
                   <button 
                     onClick={() => setAdminTab('problems')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'problems' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'problems' ? 'bg-slate-200 text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'}`}
                   >
                     Problem Statements
                   </button>
                   <button 
                     onClick={() => setAdminTab('teams')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'teams' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'teams' ? 'bg-slate-200 text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'}`}
                   >
                     Manage Teams
                   </button>
                   <button 
                     onClick={() => setAdminTab('helpdesk')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'helpdesk' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'helpdesk' ? 'bg-slate-200 text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'}`}
                   >
                     Helpdesk
                   </button>
@@ -175,22 +175,22 @@ export default function Dashboard({ role, setRole }) {
 
             {role === 'judge' && (
               <div>
-                <div className="flex gap-2 mb-8 bg-white/5 p-1.5 rounded-2xl border border-white/5 backdrop-blur-md w-fit">
+                <div className="flex gap-2 mb-8 bg-slate-100 p-1.5 rounded-2xl border border-slate-200 backdrop-blur-md w-fit">
                   <button 
                     onClick={() => setJudgeTab('assignments')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${judgeTab === 'assignments' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${judgeTab === 'assignments' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'}`}
                   >
                     Assignments
                   </button>
                   <button 
                     onClick={() => setJudgeTab('teams')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${judgeTab === 'teams' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${judgeTab === 'teams' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'}`}
                   >
                     Teams & Participants
                   </button>
                   <button 
                     onClick={() => setJudgeTab('helpdesk')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${judgeTab === 'helpdesk' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${judgeTab === 'helpdesk' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'}`}
                   >
                     Helpdesk
                   </button>
@@ -205,28 +205,28 @@ export default function Dashboard({ role, setRole }) {
                     transition={{ duration: 0.2 }}
                   >
                     {judgeTab === 'assignments' && (
-                      <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md">
+                      <div className="bg-slate-100 border border-slate-200 rounded-3xl p-8 backdrop-blur-md">
                         <h2 className="text-2xl font-heading font-bold mb-6 flex items-center gap-3 text-blue-100">
                           <Gavel className="w-6 h-6 text-blue-400" /> Judging Panel
                         </h2>
-                        <p className="text-zinc-400 mb-8">Projects assigned to you for evaluation. Validate their work by checking their local GitHub profiles.</p>
+                        <p className="text-slate-600 mb-8">Projects assigned to you for evaluation. Validate their work by checking their local GitHub profiles.</p>
                         
                         <div className="space-y-4">
                           {assignments.length === 0 ? (
-                            <p className="text-zinc-500 italic">No assignments yet. Wait for admin to run algorithms.</p>
+                            <p className="text-slate-500 italic">No assignments yet. Wait for admin to run algorithms.</p>
                           ) : assignments.map(a => (
-                            <motion.div whileHover={{ scale: 1.01 }} key={a.assignment_id} className="bg-bg-darker p-6 rounded-2xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-blue-500/30 transition-colors group shadow-lg">
+                            <motion.div whileHover={{ scale: 1.01 }} key={a.assignment_id} className="bg-bg-darker p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-blue-500/30 transition-colors group shadow-lg">
                               <div>
-                                <h3 className="text-lg font-medium text-white group-hover:text-blue-300 transition-colors">{a.name}</h3>
-                                <p className="text-sm text-zinc-500 mt-1">Submitted by {a.team}</p>
+                                <h3 className="text-lg font-medium text-slate-900 group-hover:text-blue-300 transition-colors">{a.name}</h3>
+                                <p className="text-sm text-slate-500 mt-1">Submitted by {a.team}</p>
                               </div>
                               <div className="flex gap-3 items-center">
                                 {a.is_submitted ? (
                                   <span className="text-green-400 text-sm font-bold bg-green-400/10 px-4 py-2 rounded-xl border border-green-400/20">Scored: {a.score}</span>
                                 ) : (
                                   <>
-                                    <a href={a.repo_url} target="_blank" rel="noreferrer" className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-medium transition-colors">View Repo</a>
-                                    <button onClick={() => setScoringAssignment(a)} className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-medium shadow-lg shadow-blue-500/20 transition-colors">Score Project</button>
+                                    <a href={a.repo_url} target="_blank" rel="noreferrer" className="px-4 py-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl text-sm font-medium transition-colors">View Repo</a>
+                                    <button onClick={() => setScoringAssignment(a)} className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-slate-900 rounded-xl text-sm font-medium shadow-lg shadow-blue-500/20 transition-colors">Score Project</button>
                                   </>
                                 )}
                               </div>
@@ -264,18 +264,19 @@ export default function Dashboard({ role, setRole }) {
             )}
 
             {role === 'participant' && (
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md">
-                <h2 className="text-2xl font-heading font-bold mb-6 flex items-center gap-3 text-primary-100">
-                  <Users className="w-6 h-6 text-primary-400" /> Participant Hub
+              <div className="bg-slate-100 border border-slate-200 rounded-3xl p-8 backdrop-blur-md">
+                <h2 className="text-2xl font-heading font-bold mb-6 flex items-center gap-3">
+                  <Users className="w-6 h-6 text-primary-600" /> 
+                  <span className="text-primary-600">Participant</span> <span className="text-red-500">Hub</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                   <TeamManager token={localStorage.getItem('access_token')} />
                   <ProjectSubmitter token={localStorage.getItem('access_token')} />
                 </div>
                 
-                <div className="p-4 bg-primary-900/30 border border-primary-500/20 rounded-2xl mb-8">
-                  <p className="text-sm text-primary-200">
-                    <strong className="text-primary-400">Notice:</strong> Submissions close in 48 hours. Ensure your 5-minute demo video is uploaded.
+                <div className="p-4 bg-primary-50 border border-primary-500/20 rounded-2xl mb-8">
+                  <p className="text-sm text-primary-800">
+                    <strong className="text-primary-600">Notice:</strong> Submissions close in 48 hours. Ensure your 5-minute demo video is uploaded.
                   </p>
                 </div>
 
