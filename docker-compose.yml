@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: dogfood_password
       POSTGRES_DB: dogfood_db
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       # We will mount a seed script later for Fixture Data Seeding
@@ -28,25 +28,23 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://dogfood:dogfood_password@db:5432/dogfood_db
+      - DATABASE_URL=postgresql+psycopg2://dogfood:dogfood_password@db:5432/dogfood_db
       - JWT_SECRET_KEY=super_secret_offline_key_for_hackathon
     restart: unless-stopped
 
-# We will uncomment the frontend once Santo initializes the Next.js app
-#  frontend:
-#    build:
-#      context: ./frontend
-#    container_name: dogfood_frontend
-#    ports:
-#      - "3000:3000"
-#    volumes:
-#      - ./frontend:/app
-#      - /app/node_modules
-#    depends_on:
-#      - backend
-#    environment:
-#      - NEXT_PUBLIC_API_URL=http://localhost:8000
-#    command: npm run dev
+  frontend:
+    build:
+      context: ./frontend
+    container_name: dogfood_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:8000
 
 volumes:
   pgdata:

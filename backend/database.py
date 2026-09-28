@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 # Fetch database URL from environment variable, fallback to local default for safety
 SQLALCHEMY_DATABASE_URL = os.getenv(
     "DATABASE_URL", 
-    "postgresql://dogfood:dogfood_password@localhost:5432/dogfood_db"
+    "postgresql+psycopg2://dogfood:dogfood_password@localhost:5433/dogfood_db"
 )
 
 # Create the SQLAlchemy engine

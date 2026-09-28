@@ -21,6 +21,9 @@ class UserResponse(BaseModel):
     class Config:
         from_attributes = True
 
+class UserUpdate(BaseModel):
+    role: str
+
 class Token(BaseModel):
     access_token: str
     token_type: str
@@ -39,6 +42,12 @@ class EventResponse(EventCreate):
         from_attributes = True
 
 # --- Teams ---
+class TeamCreate(BaseModel):
+    name: str
+
+class TeamUpdate(BaseModel):
+    name: str
+
 class TeamJoinRequest(BaseModel):
     invite_code: str
 
