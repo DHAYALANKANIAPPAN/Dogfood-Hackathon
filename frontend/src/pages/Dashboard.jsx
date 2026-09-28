@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LogOut, Calendar, MapPin, Code2, Users, Shield, Gavel, CheckCircle2, Image as ImageIcon } from 'lucide-react';
+import { LogOut, Calendar, MapPin, Code2, Dog, Users, Shield, Gavel, CheckCircle2, Image as ImageIcon, Trophy } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import AdminConfig from '../components/AdminConfig';
@@ -58,9 +58,9 @@ export default function Dashboard({ role, setRole }) {
       exit={{ opacity: 0 }}
       className="min-h-screen bg-bg-darker text-white font-sans overflow-x-hidden relative"
     >
-      {/* Cyberpunk Grid & Scanlines */}
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20" />
-      <div className="absolute top-[-100%] left-0 w-full h-8 bg-primary-500/20 blur-xl animate-scanline pointer-events-none" />
+      {/* Background gradients */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary-500/20 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-secondary-500/10 blur-[120px] rounded-full pointer-events-none" />
       
       {/* Navigation */}
       <nav className="border-b border-primary-500/20 bg-black/60 backdrop-blur-xl sticky top-0 z-50">
@@ -69,26 +69,29 @@ export default function Dashboard({ role, setRole }) {
             to="/"
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="w-10 h-10 rounded-sm bg-primary-500/20 border border-primary-500 flex items-center justify-center shadow-[0_0_10px_rgba(0,240,255,0.2)] group-hover:bg-primary-500 transition-colors">
-              <Code2 className="w-5 h-5 text-primary-500 group-hover:text-black transition-colors" />
+            <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover:bg-primary-500/10 transition-colors">
+              <Dog className="w-5 h-5 text-primary-400" />
             </div>
-            <span className="text-xl neon-text tracking-widest uppercase">Dogfood_OS</span>
+            <span className="text-xl font-heading font-bold tracking-widest text-white">DOGFOOD</span>
           </Link>
           
           <div className="flex items-center gap-6">
             {(role === 'admin' || role === 'judge') && (
-              <Link to="/gallery" className="text-zinc-400 hover:text-primary-400 transition-colors flex items-center gap-2 text-sm font-mono uppercase tracking-widest">
+              <Link to="/gallery" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
                 <ImageIcon className="w-4 h-4" /> Gallery
               </Link>
             )}
-            <div className="flex items-center gap-2 px-4 py-2 bg-black/50 rounded-sm border border-primary-500/30">
-              {role === 'admin' && <Shield className="w-4 h-4 text-secondary-500" />}
-              {role === 'judge' && <Gavel className="w-4 h-4 text-primary-500" />}
-              {role === 'participant' && <Users className="w-4 h-4 text-primary-400" />}
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary-200">{role}</span>
+            <Link to="/leaderboard" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+              <Trophy className="w-4 h-4" /> Leaderboard
+            </Link>
+            <div className="flex items-center gap-2 px-4 py-2 bg-white/[0.03] rounded-full border border-white/[0.05]">
+              {role === 'admin' && <Shield className="w-4 h-4 text-primary-400" />}
+              {role === 'judge' && <Gavel className="w-4 h-4 text-secondary-400" />}
+              {role === 'participant' && <Users className="w-4 h-4 text-green-400" />}
+              <span className="text-xs font-medium uppercase tracking-wider text-zinc-300">{role}</span>
             </div>
-            <button onClick={handleLogout} className="text-zinc-500 hover:text-secondary-500 transition-colors flex items-center gap-2 text-sm font-mono uppercase tracking-widest">
-              <LogOut className="w-4 h-4" /> Disconnect
+            <button onClick={handleLogout} className="text-zinc-500 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+              <LogOut className="w-4 h-4" /> Log out
             </button>
           </div>
         </div>
@@ -97,38 +100,33 @@ export default function Dashboard({ role, setRole }) {
       <main className="max-w-7xl mx-auto px-6 py-12 relative z-10">
         {/* Header / Event Details */}
         <motion.section 
-          initial={{ y: -20, opacity: 0, rotateX: 10 }}
-          animate={{ y: 0, opacity: 1, rotateX: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, type: "spring" }}
-          className="mb-12 glass-panel neon-border p-8 md:p-12 relative overflow-visible"
-          style={{ perspective: 1000 }}
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mb-12 glass-panel p-8 md:p-12 relative rounded-3xl"
         >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary-500/5 blur-[100px] rounded-full" />
-          
           <div className="relative z-10 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1 bg-secondary-500/10 text-secondary-500 text-xs font-mono font-bold uppercase tracking-widest border border-secondary-500/50 mb-6">
-              <div className="w-2 h-2 rounded-none bg-secondary-500 animate-pulse" /> SYSTEM_ONLINE
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-500/10 text-primary-400 text-xs font-medium rounded-full border border-primary-500/20 mb-6">
+              <div className="w-2 h-2 rounded-full bg-primary-400 animate-pulse" /> Live Event Active
             </div>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 neon-text uppercase tracking-tight">Mainframe Interface</h1>
-            <p className="text-lg text-primary-200/60 font-mono mb-8 leading-relaxed max-w-2xl">
-              &gt; SECURE CONNECTION ESTABLISHED.<br/>
-              &gt; OFFLINE-FIRST PROTOCOL ENGAGED.<br/>
-              &gt; AWAITING COMMAND EXECUTION...
+            <h1 className="text-4xl md:text-5xl font-heading font-semibold mb-4 text-white">Event Dashboard</h1>
+            <p className="text-lg text-zinc-400 mb-8 leading-relaxed max-w-2xl">
+              Welcome to the central hub for the Dogfood 2026 Hackathon. Manage your projects, teams, and judging assignments here.
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <div className="flex items-center gap-3 text-primary-300 bg-black/40 px-4 py-3 border border-primary-500/30">
-                <Calendar className="w-5 h-5 text-primary-500" />
+              <div className="flex items-center gap-3 bg-white/[0.03] rounded-2xl px-5 py-4 border border-white/[0.05]">
+                <Calendar className="w-5 h-5 text-primary-400" />
                 <div>
-                  <p className="text-[10px] text-primary-500/50 font-mono font-bold uppercase tracking-widest">Time Remaining</p>
-                  <p className="font-mono font-bold tracking-wider">72:00:00</p>
+                  <p className="text-[11px] text-zinc-500 font-medium uppercase tracking-wider">Time Remaining</p>
+                  <p className="font-semibold text-zinc-200">72 Hours</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 text-primary-300 bg-black/40 px-4 py-3 border border-primary-500/30">
-                <MapPin className="w-5 h-5 text-primary-500" />
+              <div className="flex items-center gap-3 bg-white/[0.03] rounded-2xl px-5 py-4 border border-white/[0.05]">
+                <MapPin className="w-5 h-5 text-primary-400" />
                 <div>
-                  <p className="text-[10px] text-primary-500/50 font-mono font-bold uppercase tracking-widest">Network Node</p>
-                  <p className="font-mono font-bold tracking-wider">localhost (eno1)</p>
+                  <p className="text-[11px] text-zinc-500 font-medium uppercase tracking-wider">Location</p>
+                  <p className="font-semibold text-zinc-200">Silicon Valley Campus</p>
                 </div>
               </div>
             </div>
@@ -147,28 +145,28 @@ export default function Dashboard({ role, setRole }) {
           >
             {role === 'admin' && (
               <div>
-                <div className="flex gap-2 mb-8 bg-white/5 p-1.5 rounded-2xl border border-white/5 backdrop-blur-md w-fit">
+                <div className="flex gap-2 mb-8 bg-white/[0.03] p-1.5 rounded-2xl border border-white/[0.05] w-fit">
                   <button 
                     onClick={() => setAdminTab('overview')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'overview' ? 'bg-red-500 text-white shadow-lg shadow-red-500/25' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'overview' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
                   >
                     System Overview
                   </button>
                   <button 
                     onClick={() => setAdminTab('config')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'config' ? 'bg-red-500 text-white shadow-lg shadow-red-500/25' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'config' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
                   >
                     Event Config
                   </button>
                   <button 
                     onClick={() => setAdminTab('users')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'users' ? 'bg-red-500 text-white shadow-lg shadow-red-500/25' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'users' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
                   >
                     Manage Users
                   </button>
                   <button 
                     onClick={() => setAdminTab('teams')}
-                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'teams' ? 'bg-red-500 text-white shadow-lg shadow-red-500/25' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'teams' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
                   >
                     Manage Teams
                   </button>
