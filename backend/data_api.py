@@ -10,6 +10,54 @@ from auth import get_current_user
 
 router = APIRouter(prefix="/api/data", tags=["data"])
 
+@router.get("/public/users")
+def get_public_users(db: Session = Depends(get_db)):
+    users = db.query(models.User).filter(models.User.role == models.RoleEnum.PARTICIPANT).all()
+    return [{"id": str(u.id), "name": u.full_name} for u in users]
+
+@router.get("/public/teams")
+def get_public_teams(db: Session = Depends(get_db)):
+    teams = db.query(models.Team).options(joinedload(models.Team.members)).all()
+    return [{
+        "id": str(t.id),
+        "name": t.name,
+        "members": [{"name": m.full_name} for m in t.members]
+    } for t in teams]
+
+@router.get("/public/problems")
+def get_public_problems(db: Session = Depends(get_db)):
+    problems = db.query(models.ProblemStatement).order_by(models.ProblemStatement.created_at.desc()).all()
+    return [{"id": str(p.id), "title": p.title, "description": p.description, "created_at": p.created_at} for p in problems]
+
+@router.post("/problems")
+def create_problem(
+    title: str, 
+    description: str,
+    db: Session = Depends(get_db), 
+    current_user: models.User = Depends(allow_admins_only)
+):
+    problem = models.ProblemStatement(
+        title=title,
+        description=description,
+        author_id=current_user.id
+    )
+    db.add(problem)
+    db.commit()
+    db.refresh(problem)
+    return {"id": str(problem.id)}
+
+@router.delete("/problems/{problem_id}")
+def delete_problem(
+    problem_id: str,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(allow_admins_only)
+):
+    problem = db.query(models.ProblemStatement).filter(models.ProblemStatement.id == problem_id).first()
+    if problem:
+        db.delete(problem)
+        db.commit()
+    return {"status": "ok"}
+
 @router.get("/users")
 def get_users(db: Session = Depends(get_db), current_user: models.User = Depends(allow_admins_only)):
     users = db.query(models.User).all()

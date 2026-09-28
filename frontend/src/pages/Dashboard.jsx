@@ -6,10 +6,13 @@ import AdminConfig from '../components/AdminConfig';
 
 import AdminOverview from '../components/AdminOverview';
 import AdminUsers from '../components/AdminUsers';
+import AdminProblems from '../components/AdminProblems';
 import TeamManager from '../components/TeamManager';
 import TeamsList from '../components/TeamsList';
 import ProjectSubmitter from '../components/ProjectSubmitter';
 import ScoringModal from '../components/ScoringModal';
+import Helpdesk from '../components/Helpdesk';
+import Announcements from '../components/Announcements';
 
 export default function Dashboard({ role, setRole }) {
   const navigate = useNavigate();
@@ -46,57 +49,12 @@ export default function Dashboard({ role, setRole }) {
     }
   }, [role]);
 
-  const handleLogout = () => {
-    setRole(null);
-    navigate('/');
-  };
-
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen bg-bg-darker text-white font-sans overflow-x-hidden relative"
-    >
+    <div className="relative">
       {/* Background gradients */}
       <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary-500/20 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-secondary-500/10 blur-[120px] rounded-full pointer-events-none" />
       
-      {/* Navigation */}
-      <nav className="border-b border-primary-500/20 bg-black/60 backdrop-blur-xl sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link 
-            to="/"
-            className="flex items-center gap-3 cursor-pointer group"
-          >
-            <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover:bg-primary-500/10 transition-colors">
-              <Dog className="w-5 h-5 text-primary-400" />
-            </div>
-            <span className="text-xl font-heading font-bold tracking-widest text-white">DOGFOOD</span>
-          </Link>
-          
-          <div className="flex items-center gap-6">
-            {(role === 'admin' || role === 'judge') && (
-              <Link to="/gallery" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
-                <ImageIcon className="w-4 h-4" /> Gallery
-              </Link>
-            )}
-            <Link to="/leaderboard" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
-              <Trophy className="w-4 h-4" /> Leaderboard
-            </Link>
-            <div className="flex items-center gap-2 px-4 py-2 bg-white/[0.03] rounded-full border border-white/[0.05]">
-              {role === 'admin' && <Shield className="w-4 h-4 text-primary-400" />}
-              {role === 'judge' && <Gavel className="w-4 h-4 text-secondary-400" />}
-              {role === 'participant' && <Users className="w-4 h-4 text-green-400" />}
-              <span className="text-xs font-medium uppercase tracking-wider text-zinc-300">{role}</span>
-            </div>
-            <button onClick={handleLogout} className="text-zinc-500 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
-              <LogOut className="w-4 h-4" /> Log out
-            </button>
-          </div>
-        </div>
-      </nav>
-
       <main className="max-w-7xl mx-auto px-6 py-12 relative z-10">
         {/* Header / Event Details */}
         <motion.section 
@@ -129,6 +87,14 @@ export default function Dashboard({ role, setRole }) {
                   <p className="font-semibold text-zinc-200">Silicon Valley Campus</p>
                 </div>
               </div>
+            <div className="flex flex-wrap gap-4 mt-6">
+              <button 
+                onClick={() => document.getElementById('announcements-section').scrollIntoView({ behavior: 'smooth' })}
+                className="px-5 py-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl text-sm font-medium transition-all shadow-sm"
+              >
+                View Live Timeline
+              </button>
+            </div>
             </div>
           </div>
         </motion.section>
@@ -165,10 +131,22 @@ export default function Dashboard({ role, setRole }) {
                     Manage Users
                   </button>
                   <button 
+                    onClick={() => setAdminTab('problems')}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'problems' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                  >
+                    Problem Statements
+                  </button>
+                  <button 
                     onClick={() => setAdminTab('teams')}
                     className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'teams' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
                   >
                     Manage Teams
+                  </button>
+                  <button 
+                    onClick={() => setAdminTab('helpdesk')}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'helpdesk' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                  >
+                    Helpdesk
                   </button>
                 </div>
 
@@ -183,9 +161,15 @@ export default function Dashboard({ role, setRole }) {
                     {adminTab === 'overview' && <AdminOverview users={users} projects={projects} />}
                     {adminTab === 'config' && <AdminConfig />}
                     {adminTab === 'users' && <AdminUsers users={users} setUsers={setUsers} />}
+                    {adminTab === 'problems' && <AdminProblems token={localStorage.getItem('access_token')} />}
                     {adminTab === 'teams' && <TeamsList role={role} token={localStorage.getItem('access_token')} />}
+                    {adminTab === 'helpdesk' && <Helpdesk role={role} />}
                   </motion.div>
                 </AnimatePresence>
+                
+                <div id="announcements-section">
+                  <Announcements role={role} />
+                </div>
               </div>
             )}
 
@@ -203,6 +187,12 @@ export default function Dashboard({ role, setRole }) {
                     className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${judgeTab === 'teams' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
                   >
                     Teams & Participants
+                  </button>
+                  <button 
+                    onClick={() => setJudgeTab('helpdesk')}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${judgeTab === 'helpdesk' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                  >
+                    Helpdesk
                   </button>
                 </div>
 
@@ -261,8 +251,15 @@ export default function Dashboard({ role, setRole }) {
                     {judgeTab === 'teams' && (
                       <TeamsList role={role} token={localStorage.getItem('access_token')} />
                     )}
+                    {judgeTab === 'helpdesk' && (
+                      <Helpdesk role={role} />
+                    )}
                   </motion.div>
                 </AnimatePresence>
+                
+                <div id="announcements-section">
+                  <Announcements role={role} />
+                </div>
               </div>
             )}
 
@@ -276,10 +273,16 @@ export default function Dashboard({ role, setRole }) {
                   <ProjectSubmitter token={localStorage.getItem('access_token')} />
                 </div>
                 
-                <div className="p-4 bg-primary-900/30 border border-primary-500/20 rounded-2xl">
+                <div className="p-4 bg-primary-900/30 border border-primary-500/20 rounded-2xl mb-8">
                   <p className="text-sm text-primary-200">
                     <strong className="text-primary-400">Notice:</strong> Submissions close in 48 hours. Ensure your 5-minute demo video is uploaded.
                   </p>
+                </div>
+
+                <Helpdesk role={role} />
+                
+                <div id="announcements-section">
+                  <Announcements role={role} />
                 </div>
               </div>
             )}
@@ -287,6 +290,6 @@ export default function Dashboard({ role, setRole }) {
           </motion.div>
         </AnimatePresence>
       </main>
-    </motion.div>
+    </div>
   );
 }

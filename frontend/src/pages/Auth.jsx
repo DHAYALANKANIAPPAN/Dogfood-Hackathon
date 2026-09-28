@@ -1,11 +1,19 @@
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Mail, Lock, User, Code2, Dog, ArrowRight, Calendar, MapPin, Trophy, Target } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Auth({ setRole }) {
-  const [isLogin, setIsLogin] = useState(true);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const initialMode = searchParams.get('mode');
+  
+  const [isLogin, setIsLogin] = useState(initialMode !== 'register');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsLogin(initialMode !== 'register');
+  }, [initialMode]);
 
   const handleAuth = async (e) => {
     e.preventDefault();
