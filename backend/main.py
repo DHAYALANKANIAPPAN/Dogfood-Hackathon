@@ -34,6 +34,8 @@ app.include_router(api.router)
 app.include_router(audit.router)
 import judging_api
 app.include_router(judging_api.router)
+import data_api
+app.include_router(data_api.router)
 
 @app.get("/")
 def read_root():
