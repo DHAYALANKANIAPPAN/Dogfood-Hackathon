@@ -1,11 +1,17 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Dog } from 'lucide-react';
 
 export default function Navbar({ role, onLogout }) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (path) => {
     return location.pathname === path ? "text-white" : "text-zinc-400 hover:text-white";
+  };
+
+  const handleLogout = () => {
+    onLogout();
+    navigate('/auth');
   };
 
   return (
@@ -41,7 +47,7 @@ export default function Navbar({ role, onLogout }) {
                   {role === 'participant' && (
                     <Link to="/dashboard" className={`transition-colors ${isActive('/dashboard')}`}>Dashboard</Link>
                   )}
-                  <button onClick={onLogout} className="text-zinc-400 hover:text-white transition-colors">Logout</button>
+                  <button onClick={handleLogout} className="text-zinc-400 hover:text-white transition-colors">Logout</button>
                 </>
               ) : (
                 <>
