@@ -11,6 +11,7 @@ import TeamsList from '../components/TeamsList';
 import ProjectSubmitter from '../components/ProjectSubmitter';
 import ScoringModal from '../components/ScoringModal';
 import Helpdesk from '../components/Helpdesk';
+import Announcements from '../components/Announcements';
 
 export default function Dashboard({ role, setRole }) {
   const navigate = useNavigate();
@@ -130,6 +131,14 @@ export default function Dashboard({ role, setRole }) {
                   <p className="font-semibold text-zinc-200">Silicon Valley Campus</p>
                 </div>
               </div>
+            <div className="flex flex-wrap gap-4 mt-6">
+              <button 
+                onClick={() => document.getElementById('announcements-section').scrollIntoView({ behavior: 'smooth' })}
+                className="px-5 py-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl text-sm font-medium transition-all shadow-sm"
+              >
+                View Live Timeline
+              </button>
+            </div>
             </div>
           </div>
         </motion.section>
@@ -194,6 +203,10 @@ export default function Dashboard({ role, setRole }) {
                     {adminTab === 'helpdesk' && <Helpdesk role={role} />}
                   </motion.div>
                 </AnimatePresence>
+                
+                <div id="announcements-section">
+                  <Announcements role={role} />
+                </div>
               </div>
             )}
 
@@ -280,6 +293,10 @@ export default function Dashboard({ role, setRole }) {
                     )}
                   </motion.div>
                 </AnimatePresence>
+                
+                <div id="announcements-section">
+                  <Announcements role={role} />
+                </div>
               </div>
             )}
 
@@ -300,6 +317,10 @@ export default function Dashboard({ role, setRole }) {
                 </div>
 
                 <Helpdesk role={role} />
+                
+                <div id="announcements-section">
+                  <Announcements role={role} />
+                </div>
               </div>
             )}
 

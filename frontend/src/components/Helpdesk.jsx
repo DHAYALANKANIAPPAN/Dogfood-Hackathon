@@ -16,7 +16,7 @@ export default function Helpdesk({ role }) {
   const fetchRequests = async () => {
     try {
       const res = await fetch('http://localhost:8000/api/help-requests', {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` }
       });
       if (!res.ok) throw new Error("Failed to fetch requests");
       const data = await res.json();
@@ -43,7 +43,7 @@ export default function Helpdesk({ role }) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
         },
         body: JSON.stringify({ issue_description: issue, location })
       });
@@ -68,7 +68,7 @@ export default function Helpdesk({ role }) {
     try {
       const res = await fetch(`http://localhost:8000/api/help-requests/${id}/status?status=${newStatus}`, {
         method: 'PUT',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` }
       });
       if (res.ok) {
         fetchRequests();

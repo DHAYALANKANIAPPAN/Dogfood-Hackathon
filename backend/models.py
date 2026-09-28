@@ -111,3 +111,15 @@ class HelpRequest(Base):
 
     team = relationship("Team")
     resolved_by = relationship("User", foreign_keys=[resolved_by_id])
+
+class Announcement(Base):
+    __tablename__ = "announcements"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    title = Column(String, nullable=False)
+    content = Column(String, nullable=False)
+    is_urgent = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    author_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+
+    author = relationship("User")
