@@ -5,6 +5,7 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 import auth
 import api
+import audit
 from security import limiter
 
 app = FastAPI(
@@ -30,6 +31,7 @@ app.add_middleware(
 # Register Routers
 app.include_router(auth.router)
 app.include_router(api.router)
+app.include_router(audit.router)
 
 @app.get("/")
 def read_root():
