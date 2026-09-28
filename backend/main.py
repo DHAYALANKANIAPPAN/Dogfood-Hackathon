@@ -32,6 +32,8 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(api.router)
 app.include_router(audit.router)
+import judging_api
+app.include_router(judging_api.router)
 
 @app.get("/")
 def read_root():
