@@ -70,3 +70,38 @@ def submit_rubric_scores(
     db.refresh(assignment)
     
     return {"status": "success", "base_score": base_score}
+
+@router.get("/leaderboard")
+def get_leaderboard(db: Session = Depends(get_db)):
+    """
+    Fetch all projects and their average scores to render the live leaderboard.
+    """
+    submissions = db.query(models.ProjectSubmission).filter(models.ProjectSubmission.is_draft == False).all()
+    leaderboard = []
+    
+    for sub in submissions:
+        assignments = db.query(models.JudgeAssignment).filter(
+            models.JudgeAssignment.submission_id == sub.id,
+            models.JudgeAssignment.is_submitted == True
+        ).all()
+        
+        total_score = 0
+        valid_reviews = 0
+        for a in assignments:
+            if a.criteria_scores and "calculated_base_score" in a.criteria_scores:
+                total_score += a.criteria_scores["calculated_base_score"]
+                valid_reviews += 1
+                
+        avg_score = total_score / valid_reviews if valid_reviews > 0 else 0
+        
+        leaderboard.append({
+            "id": str(sub.id),
+            "title": sub.title,
+            "team_name": sub.team.name if sub.team else "Unknown Team",
+            "score": round(avg_score, 2),
+            "reviews": valid_reviews
+        })
+        
+    # Sort by score descending
+    leaderboard.sort(key=lambda x: x["score"], reverse=True)
+    return leaderboard
