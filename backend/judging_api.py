@@ -10,8 +10,21 @@ from auth import get_current_user
 
 from algorithms.assignment import assign_judges_to_submissions
 from algorithms.scoring import calculate_weighted_score
+from algorithms.normalization import normalize_all_scores
 
 router = APIRouter(prefix="/api/judging", tags=["judging"])
+
+@router.post("/normalize")
+def trigger_normalization(
+    db: Session = Depends(get_db), 
+    current_user: models.User = Depends(allow_admins_only)
+):
+    """
+    T2: Cross-Judge Score Normalization.
+    Only Admins and Organizers can trigger the final normalization run.
+    """
+    result = normalize_all_scores(db)
+    return result
 
 @router.post("/run-assignments")
 def trigger_judge_assignments(
