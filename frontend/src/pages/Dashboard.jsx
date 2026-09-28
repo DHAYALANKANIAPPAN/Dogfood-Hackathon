@@ -10,6 +10,7 @@ import TeamManager from '../components/TeamManager';
 import TeamsList from '../components/TeamsList';
 import ProjectSubmitter from '../components/ProjectSubmitter';
 import ScoringModal from '../components/ScoringModal';
+import Helpdesk from '../components/Helpdesk';
 
 export default function Dashboard({ role, setRole }) {
   const navigate = useNavigate();
@@ -170,6 +171,12 @@ export default function Dashboard({ role, setRole }) {
                   >
                     Manage Teams
                   </button>
+                  <button 
+                    onClick={() => setAdminTab('helpdesk')}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${adminTab === 'helpdesk' ? 'bg-white/10 text-white shadow-sm' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                  >
+                    Helpdesk
+                  </button>
                 </div>
 
                 <AnimatePresence mode="wait">
@@ -184,6 +191,7 @@ export default function Dashboard({ role, setRole }) {
                     {adminTab === 'config' && <AdminConfig />}
                     {adminTab === 'users' && <AdminUsers users={users} setUsers={setUsers} />}
                     {adminTab === 'teams' && <TeamsList role={role} token={localStorage.getItem('access_token')} />}
+                    {adminTab === 'helpdesk' && <Helpdesk role={role} />}
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -203,6 +211,12 @@ export default function Dashboard({ role, setRole }) {
                     className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${judgeTab === 'teams' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
                   >
                     Teams & Participants
+                  </button>
+                  <button 
+                    onClick={() => setJudgeTab('helpdesk')}
+                    className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${judgeTab === 'helpdesk' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+                  >
+                    Helpdesk
                   </button>
                 </div>
 
@@ -261,6 +275,9 @@ export default function Dashboard({ role, setRole }) {
                     {judgeTab === 'teams' && (
                       <TeamsList role={role} token={localStorage.getItem('access_token')} />
                     )}
+                    {judgeTab === 'helpdesk' && (
+                      <Helpdesk role={role} />
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -276,11 +293,13 @@ export default function Dashboard({ role, setRole }) {
                   <ProjectSubmitter token={localStorage.getItem('access_token')} />
                 </div>
                 
-                <div className="p-4 bg-primary-900/30 border border-primary-500/20 rounded-2xl">
+                <div className="p-4 bg-primary-900/30 border border-primary-500/20 rounded-2xl mb-8">
                   <p className="text-sm text-primary-200">
                     <strong className="text-primary-400">Notice:</strong> Submissions close in 48 hours. Ensure your 5-minute demo video is uploaded.
                   </p>
                 </div>
+
+                <Helpdesk role={role} />
               </div>
             )}
 

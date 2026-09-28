@@ -13,6 +13,11 @@ class RoleEnum(str, enum.Enum):
     JUDGE = "JUDGE"
     PARTICIPANT = "PARTICIPANT"
 
+class HelpRequestStatus(str, enum.Enum):
+    OPEN = "OPEN"
+    IN_PROGRESS = "IN_PROGRESS"
+    RESOLVED = "RESOLVED"
+
 class User(Base):
     __tablename__ = "users"
 
@@ -91,3 +96,18 @@ class JudgeAssignment(Base):
 
     judge = relationship("User", back_populates="judge_assignments")
     submission = relationship("ProjectSubmission", back_populates="assignments")
+
+class HelpRequest(Base):
+    __tablename__ = "help_requests"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    team_id = Column(UUID(as_uuid=True), ForeignKey("teams.id"), nullable=False)
+    issue_description = Column(String, nullable=False)
+    location = Column(String, nullable=False)
+    status = Column(Enum(HelpRequestStatus), default=HelpRequestStatus.OPEN, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    resolved_at = Column(DateTime, nullable=True)
+    resolved_by_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
+
+    team = relationship("Team")
+    resolved_by = relationship("User", foreign_keys=[resolved_by_id])

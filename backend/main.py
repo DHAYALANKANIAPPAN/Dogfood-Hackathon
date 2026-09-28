@@ -36,6 +36,8 @@ import judging_api
 app.include_router(judging_api.router)
 import data_api
 app.include_router(data_api.router)
+from routers import helpdesk
+app.include_router(helpdesk.router, prefix="/api/help-requests", tags=["helpdesk"])
 
 @app.get("/")
 def read_root():
