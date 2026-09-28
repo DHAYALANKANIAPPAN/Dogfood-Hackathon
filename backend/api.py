@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status, BackgroundTasks
 from sqlalchemy.orm import Session
 from uuid import UUID
 
@@ -6,6 +6,7 @@ import models, schemas
 from database import get_db
 from auth import get_current_user
 from security import limiter, allow_admins_only, allow_all_authenticated
+from webhooks import dispatch_webhook
 
 router = APIRouter(prefix="/api", tags=["core"])
 
@@ -50,7 +51,8 @@ def join_team(
 @limiter.limit("10/minute")
 def submit_project(
     request: Request,
-    sub: schemas.SubmissionCreate, 
+    sub: schemas.SubmissionCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db), 
     current_user: models.User = Depends(allow_all_authenticated)
 ):
@@ -64,10 +66,16 @@ def submit_project(
             setattr(existing_sub, key, value)
         db.commit()
         db.refresh(existing_sub)
+        
+        # Trigger Webhook
+        background_tasks.add_task(dispatch_webhook, "project.updated", {"title": existing_sub.title})
         return existing_sub
     
     new_sub = models.ProjectSubmission(**sub.model_dump(), team_id=current_user.team_id)
     db.add(new_sub)
     db.commit()
     db.refresh(new_sub)
+    
+    # Trigger Webhook
+    background_tasks.add_task(dispatch_webhook, "project.submitted", {"title": new_sub.title})
     return new_sub
