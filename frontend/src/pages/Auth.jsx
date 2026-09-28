@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Mail, Lock, User, Code2, ArrowRight } from 'lucide-react';
+import { Mail, Lock, User, Code2, ArrowRight, Calendar, MapPin, Trophy, Target } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Auth({ setRole }) {
@@ -97,33 +97,77 @@ export default function Auth({ setRole }) {
               initial={{ rotate: -180, scale: 0 }}
               animate={{ rotate: 0, scale: 1 }}
               transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.2 }}
-              className="w-16 h-16 bg-primary-500/20 border border-primary-500 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(0,240,255,0.4)] mb-8 animate-float"
+              className="w-16 h-16 bg-primary-500/20 border border-primary-500 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(0,240,255,0.4)] mb-6 animate-float"
             >
               <Code2 className="w-8 h-8 text-primary-400" />
             </motion.div>
             <h1 className="text-4xl md:text-5xl font-heading font-bold neon-text mb-4">Dogfood 2026</h1>
-            <p className="text-zinc-400 text-lg leading-relaxed">
+            <p className="text-zinc-400 text-lg leading-relaxed mb-8">
               Enter the grid. The ultimate offline-first hackathon environment. No external connections, pure code.
             </p>
-          </div>
-          
-          <div className="mt-12 space-y-6">
-            <div className="flex items-center gap-4">
-              <div className="flex -space-x-3">
-                {[1,2,3,4].map((i, idx) => (
-                  <motion.img 
-                    initial={{ opacity: 0, x: -20, scale: 0 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    transition={{ type: "spring", delay: 0.4 + (idx * 0.1) }}
-                    key={i} src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i}&backgroundColor=00f0ff`} alt="user" className="w-12 h-12 rounded-full border-2 border-bg-card shadow-[0_0_10px_rgba(0,240,255,0.3)]" 
-                  />
-                ))}
-              </div>
-              <motion.p 
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
-                className="text-sm text-primary-400 font-medium tracking-widest uppercase"
-              >System Active</motion.p>
-            </div>
+
+            {/* Event Details Grid */}
+            <motion.div 
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.2, delayChildren: 0.3 }
+                }
+              }}
+              className="grid grid-cols-1 gap-4 mb-8"
+            >
+              {[
+                { icon: Calendar, title: "Operation Window", desc: "Oct 10 - 12, 2026 (72 Hours)", color: "text-primary-500", bg: "bg-primary-500/10", border: "border-primary-500/20" },
+                { icon: MapPin, title: "Network Node", desc: "Silicon Valley Mainframe (Offline)", color: "text-primary-500", bg: "bg-primary-500/10", border: "border-primary-500/20" },
+                { icon: Trophy, title: "Bounty Pool", desc: "$50,000 Grand Prize ($100k Total)", color: "text-secondary-500", bg: "bg-secondary-500/10", border: "border-secondary-500/30", glow: "shadow-[0_0_15px_rgba(255,0,60,0.1)]" }
+              ].map((item, i) => (
+                <motion.div 
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, x: -50, rotateX: -30 },
+                    visible: { 
+                      opacity: 1, 
+                      x: 0, 
+                      rotateX: 0,
+                      transition: { type: "spring", stiffness: 200, damping: 15 }
+                    }
+                  }}
+                  whileHover={{ 
+                    scale: 1.02, 
+                    x: 10,
+                    boxShadow: item.color === "text-secondary-500" ? "0 0 25px rgba(255,0,60,0.3)" : "0 0 20px rgba(0,240,255,0.2)",
+                    transition: { type: "spring", stiffness: 400, damping: 10 }
+                  }}
+                  className={`flex items-center gap-4 p-4 bg-black/40 border ${item.border} rounded-xl ${item.glow || ''} relative overflow-hidden group`}
+                >
+                  {/* Hover Scanline Effect inside Card */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[scanline-x_1.5s_ease-in-out_infinite]" />
+                  
+                  <motion.div 
+                    whileHover={{ rotate: 180, scale: 1.2 }}
+                    transition={{ type: "spring" }}
+                    className={`p-3 ${item.bg} rounded-lg relative z-10`}
+                  >
+                    <item.icon className={`w-6 h-6 ${item.color}`} />
+                  </motion.div>
+                  <div className="relative z-10">
+                    <p className={`text-xs ${item.color.replace('text-', 'text-').replace('-500', '-500/70')} font-mono font-bold uppercase tracking-widest mb-1`}>{item.title}</p>
+                    <p className="text-white font-medium">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
+              className="flex items-center gap-3 text-sm text-primary-400 font-medium tracking-widest uppercase"
+            >
+              <div className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
+              System Active & Accepting Registrations
+            </motion.div>
           </div>
         </div>
 
