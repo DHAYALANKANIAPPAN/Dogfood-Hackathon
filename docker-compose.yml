@@ -32,21 +32,19 @@ services:
       - JWT_SECRET_KEY=super_secret_offline_key_for_hackathon
     restart: unless-stopped
 
-# We will uncomment the frontend once Santo initializes the Next.js app
-#  frontend:
-#    build:
-#      context: ./frontend
-#    container_name: dogfood_frontend
-#    ports:
-#      - "3000:3000"
-#    volumes:
-#      - ./frontend:/app
-#      - /app/node_modules
-#    depends_on:
-#      - backend
-#    environment:
-#      - NEXT_PUBLIC_API_URL=http://localhost:8000
-#    command: npm run dev
+  frontend:
+    build:
+      context: ./frontend
+    container_name: dogfood_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:8000
 
 volumes:
   pgdata:
