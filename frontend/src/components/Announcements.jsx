@@ -72,20 +72,20 @@ export default function Announcements({ role }) {
   };
 
   return (
-    <div className="bg-white/[0.02] border border-white/[0.05] rounded-3xl p-8 mt-8 animate-in fade-in slide-in-from-bottom-4">
+    <div className="bg-white border border-slate-200 rounded-3xl p-8 mt-8 animate-in fade-in slide-in-from-bottom-4">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-heading font-semibold text-white flex items-center gap-3">
-            <Megaphone className="w-6 h-6 text-primary-400" />
+          <h2 className="text-2xl font-heading font-semibold text-slate-900 flex items-center gap-3">
+            <Megaphone className="w-6 h-6 text-primary-600" />
             Live Event Timeline
           </h2>
-          <p className="text-zinc-400 mt-2">Latest updates and announcements from the organizers.</p>
+          <p className="text-slate-600 mt-2">Latest updates and announcements from the organizers.</p>
         </div>
         
         {(role === 'admin' || role === 'organizer') && (
           <button 
             onClick={() => setShowForm(!showForm)}
-            className="px-5 py-2.5 bg-white/[0.05] hover:bg-white/[0.1] text-white rounded-xl text-sm font-medium transition-all flex items-center gap-2"
+            className="px-5 py-2.5 bg-slate-100 hover:bg-white/[0.1] text-slate-900 rounded-xl text-sm font-medium transition-all flex items-center gap-2"
           >
             {showForm ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
             {showForm ? 'Cancel' : 'New Broadcast'}
@@ -101,7 +101,7 @@ export default function Announcements({ role }) {
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden mb-8"
           >
-            <form onSubmit={handleSubmit} className="bg-white/[0.03] border border-white/[0.05] rounded-2xl p-6">
+            <form onSubmit={handleSubmit} className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
               <div className="space-y-4">
                 <div>
                   <input 
@@ -110,7 +110,7 @@ export default function Announcements({ role }) {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
-                    className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-primary-500 transition-colors font-medium text-lg"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-primary-500 transition-colors font-medium text-lg"
                   />
                 </div>
                 <div>
@@ -119,16 +119,16 @@ export default function Announcements({ role }) {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     required
-                    className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-primary-500 h-24 resize-none transition-colors"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-primary-500 h-24 resize-none transition-colors"
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <label className="flex items-center gap-2 text-sm text-zinc-300 cursor-pointer">
+                  <label className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
                     <input 
                       type="checkbox" 
                       checked={isUrgent}
                       onChange={(e) => setIsUrgent(e.target.checked)}
-                      className="rounded border-white/20 bg-white/5 text-primary-500 focus:ring-primary-500"
+                      className="rounded border-slate-300 bg-slate-100 text-primary-500 focus:ring-primary-500"
                     />
                     Mark as Urgent (Red Alert)
                   </label>
@@ -147,11 +147,11 @@ export default function Announcements({ role }) {
         )}
       </AnimatePresence>
 
-      <div className="relative pl-6 border-l-2 border-white/[0.05] space-y-8 py-4">
+      <div className="relative pl-6 border-l-2 border-slate-200 space-y-8 py-4">
         {loading ? (
-          <div className="text-zinc-500">Loading timeline...</div>
+          <div className="text-slate-500">Loading timeline...</div>
         ) : announcements.length === 0 ? (
-          <div className="text-zinc-500">No announcements yet. Enjoy the quiet!</div>
+          <div className="text-slate-500">No announcements yet. Enjoy the quiet!</div>
         ) : (
           announcements.map((ann, idx) => (
             <motion.div 
@@ -161,22 +161,22 @@ export default function Announcements({ role }) {
               transition={{ delay: idx * 0.1 }}
               className="relative"
             >
-              <div className={`absolute -left-[35px] top-1 w-4 h-4 rounded-full border-4 border-bg-darker ${ann.is_urgent ? 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]' : 'bg-primary-500'}`} />
-              <div className={`p-6 rounded-2xl border ${ann.is_urgent ? 'bg-red-500/[0.02] border-red-500/20' : 'bg-white/[0.02] border-white/[0.05]'}`}>
+              <div className={`absolute -left-[35px] top-1 w-4 h-4 rounded-full border-4 border-bg-darker ${ann.is_urgent ? 'bg-red-500 shadow-md shadow-red-500/20' : 'bg-primary-500'}`} />
+              <div className={`p-6 rounded-2xl border ${ann.is_urgent ? 'bg-red-500/[0.02] border-red-500/20' : 'bg-white border-slate-200'}`}>
                 <div className="flex items-start justify-between mb-2">
-                  <h3 className={`text-lg font-heading font-semibold flex items-center gap-2 ${ann.is_urgent ? 'text-red-400' : 'text-white'}`}>
+                  <h3 className={`text-lg font-heading font-semibold flex items-center gap-2 ${ann.is_urgent ? 'text-red-400' : 'text-slate-900'}`}>
                     {ann.is_urgent && <AlertTriangle className="w-5 h-5" />}
                     {ann.title}
                   </h3>
-                  <div className="flex items-center gap-2 text-xs text-zinc-500 font-medium bg-white/[0.03] px-2.5 py-1 rounded-full">
+                  <div className="flex items-center gap-2 text-xs text-slate-500 font-medium bg-slate-50 px-2.5 py-1 rounded-full">
                     <Clock className="w-3 h-3" />
                     {new Date(ann.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>
                 </div>
-                <p className="text-zinc-300 leading-relaxed whitespace-pre-wrap">{ann.content}</p>
-                <div className="mt-4 pt-4 border-t border-white/[0.05] flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs text-zinc-500">
-                    <span className="w-6 h-6 rounded-full bg-white/[0.05] flex items-center justify-center font-semibold text-zinc-400">
+                <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">{ann.content}</p>
+                <div className="mt-4 pt-4 border-t border-slate-200 flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs text-slate-500">
+                    <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center font-semibold text-slate-600">
                       {ann.author_name.charAt(0)}
                     </span>
                     Posted by {ann.author_name}

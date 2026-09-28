@@ -41,22 +41,22 @@ export default function AdminUsers({ users = [], setUsers }) {
   };
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md mt-8 animate-in fade-in slide-in-from-bottom-4">
+    <div className="bg-slate-100 border border-slate-200 rounded-3xl p-8 backdrop-blur-md mt-8 animate-in fade-in slide-in-from-bottom-4">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-        <h2 className="text-2xl font-heading font-bold flex items-center gap-3 text-white">
-          <UserCog className="w-6 h-6 text-primary-400" /> User Management
+        <h2 className="text-2xl font-heading font-bold flex items-center gap-3 text-slate-900">
+          <UserCog className="w-6 h-6 text-primary-600" /> User Management
         </h2>
         
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="w-4 h-4 text-zinc-500" />
+            <Search className="w-4 h-4 text-slate-500" />
           </div>
           <input 
             type="text" 
             placeholder="Search users..." 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 pr-4 py-2 bg-bg-darker border border-white/10 rounded-lg text-sm text-white placeholder-zinc-500 focus:ring-2 focus:ring-primary-500/50 outline-none w-full md:w-64"
+            className="pl-9 pr-4 py-2 bg-bg-darker border border-slate-200 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-primary-500/50 outline-none w-full md:w-64"
           />
         </div>
       </div>
@@ -64,7 +64,7 @@ export default function AdminUsers({ users = [], setUsers }) {
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-white/10 text-zinc-400 text-sm uppercase tracking-wider">
+            <tr className="border-b border-slate-200 text-slate-600 text-sm uppercase tracking-wider">
               <th className="pb-4 font-medium">User</th>
               <th className="pb-4 font-medium">Email</th>
               <th className="pb-4 font-medium">Role</th>
@@ -73,17 +73,17 @@ export default function AdminUsers({ users = [], setUsers }) {
           </thead>
           <tbody className="divide-y divide-white/5">
             {filteredUsers.map(user => (
-              <tr key={user.id} className="group hover:bg-white/5 transition-colors">
+              <tr key={user.id} className="group hover:bg-slate-100 transition-colors">
                 <td className="py-4 flex items-center gap-3">
                   <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`} alt={user.name} className="w-8 h-8 rounded-full bg-bg-darker" />
                   <span className="font-medium text-zinc-100">{user.name}</span>
                 </td>
-                <td className="py-4 text-zinc-400 text-sm">{user.email}</td>
+                <td className="py-4 text-slate-600 text-sm">{user.email}</td>
                 <td className="py-4">
                   <select 
                     value={user.role}
                     onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                    className="bg-bg-darker border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white outline-none focus:border-primary-500"
+                    className="bg-bg-darker border border-slate-200 rounded-lg px-3 py-1.5 text-sm text-slate-900 outline-none focus:border-primary-500"
                   >
                     <option value="participant">Participant</option>
                     <option value="judge">Judge</option>
@@ -91,7 +91,7 @@ export default function AdminUsers({ users = [], setUsers }) {
                   </select>
                 </td>
                 <td className="py-4 text-right">
-                  <button onClick={() => handleDelete(user.id)} className="p-2 text-zinc-500 hover:text-red-400 hover:bg-white/5 rounded-lg transition-colors">
+                  <button onClick={() => handleDelete(user.id)} className="p-2 text-slate-500 hover:text-red-400 hover:bg-slate-100 rounded-lg transition-colors">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </td>
@@ -100,7 +100,7 @@ export default function AdminUsers({ users = [], setUsers }) {
           </tbody>
         </table>
         {filteredUsers.length === 0 && (
-          <div className="text-center py-12 text-zinc-500">No users found matching "{search}"</div>
+          <div className="text-center py-12 text-slate-500">No users found matching "{search}"</div>
         )}
       </div>
     </div>

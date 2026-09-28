@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Mail, Lock, User, Code2, Dog, ArrowRight, Calendar, MapPin, Trophy, Target } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import AnimatedDog from '../components/AnimatedDog';
 
 export default function Auth({ setRole }) {
   const location = useLocation();
@@ -86,21 +87,28 @@ export default function Auth({ setRole }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-bg-darker flex items-center justify-center p-6 relative overflow-hidden"
+      className="min-h-screen bg-slate-100 flex items-center justify-center p-6 relative overflow-hidden"
     >
       <motion.div 
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full max-w-5xl glass-panel rounded-3xl overflow-hidden flex flex-col md:flex-row relative z-10"
+        className="w-full max-w-5xl bg-white shadow-xl border border-slate-200 rounded-3xl overflow-hidden flex flex-col md:flex-row relative z-10"
       >
-        <div className="md:w-1/2 p-12 flex flex-col justify-between bg-white/[0.02] border-r border-white/[0.05] relative">
-          <div>
+        <div className="md:w-1/2 p-12 flex flex-col justify-between bg-white border-r border-slate-200 relative overflow-hidden">
+          {/* Animated Dog Background watermark */}
+          <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.08] pointer-events-none scale-150 -translate-x-12 translate-y-12">
+            <AnimatedDog className="" />
+          </div>
+          
+          <div className="relative z-10">
             <div className="w-12 h-12 bg-primary-500/10 border border-primary-500/20 rounded-xl flex items-center justify-center mb-8">
-              <Dog className="w-6 h-6 text-primary-400" />
+              <Dog className="w-6 h-6 text-primary-600" />
             </div>
-            <h1 className="text-4xl font-heading font-semibold text-white mb-4">DOGFOOD Hackathon 2026</h1>
-            <p className="text-zinc-400 text-lg leading-relaxed mb-10">
+            <h1 className="text-4xl font-heading font-semibold mb-4 tracking-tight">
+              <span className="text-primary-600">DOGFOOD</span> <span className="text-red-500">Hackathon 2026</span>
+            </h1>
+            <p className="text-slate-600 text-lg leading-relaxed mb-10">
               Join the brightest minds to build the future. 72 hours of intense coding, collaboration, and innovation.
             </p>
 
@@ -118,8 +126,8 @@ export default function Auth({ setRole }) {
               className="grid grid-cols-1 gap-4 mb-8"
             >
               {[
-                { icon: Calendar, title: "When", desc: "Oct 10 - 12, 2026", color: "text-primary-400" },
-                { icon: MapPin, title: "Where", desc: "Silicon Valley Campus", color: "text-primary-400" },
+                { icon: Calendar, title: "When", desc: "Oct 10 - 12, 2026", color: "text-primary-600" },
+                { icon: MapPin, title: "Where", desc: "Silicon Valley Campus", color: "text-primary-600" },
                 { icon: Trophy, title: "Prize Pool", desc: "$50,000 Grand Prize", color: "text-secondary-400" }
               ].map((item, i) => (
                 <motion.div 
@@ -128,27 +136,27 @@ export default function Auth({ setRole }) {
                     hidden: { opacity: 0, y: 10 },
                     visible: { opacity: 1, y: 0, transition: { ease: "easeOut" } }
                   }}
-                  className="flex items-center gap-4 p-4 bg-white/[0.02] border border-white/[0.05] rounded-xl hover:bg-white/[0.04] transition-colors"
+                  className="flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl hover:bg-white/[0.04] transition-colors"
                 >
-                  <div className="p-2.5 bg-white/[0.03] rounded-lg">
+                  <div className="p-2.5 bg-slate-50 rounded-lg">
                     <item.icon className={`w-5 h-5 ${item.color}`} />
                   </div>
                   <div>
-                    <p className="text-xs text-zinc-500 font-medium uppercase tracking-wider mb-0.5">{item.title}</p>
-                    <p className="text-zinc-200 font-medium text-sm">{item.desc}</p>
+                    <p className="text-xs text-slate-500 font-medium uppercase tracking-wider mb-0.5">{item.title}</p>
+                    <p className="text-slate-800 font-medium text-sm">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
             </motion.div>
             
-            <div className="flex items-center gap-2 text-sm text-zinc-400 font-medium">
+            <div className="flex items-center gap-2 text-sm text-slate-600 font-medium">
               <div className="w-2 h-2 rounded-full bg-green-500" />
               Registration Open
             </div>
           </div>
         </div>
 
-        <div className="md:w-1/2 p-12 bg-black/20">
+        <div className="md:w-1/2 p-12 bg-slate-100 relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={isLogin ? 'login' : 'register'}
@@ -157,43 +165,43 @@ export default function Auth({ setRole }) {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
             >
-              <h2 className="text-3xl font-heading font-semibold text-white mb-2">
+              <h2 className="text-3xl font-heading font-semibold text-primary-600 mb-2">
                 {isLogin ? 'Welcome back' : 'Create an account'}
               </h2>
-              <p className="text-zinc-400 mb-8 text-sm">
+              <p className="text-slate-600 mb-8 text-sm">
                 {isLogin ? 'Enter your details to sign in to your account' : 'Sign up to register for the hackathon'}
               </p>
 
               <form onSubmit={handleAuth} className="space-y-5">
                 {!isLogin && (
                   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>
-                    <label className="block text-sm font-medium text-zinc-400 mb-1.5">Full Name</label>
+                    <label className="block text-sm font-medium text-slate-600 mb-1.5">Full Name</label>
                     <div className="relative group">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                        <User className="w-5 h-5 text-zinc-500 group-focus-within:text-primary-400 transition-colors" />
+                        <User className="w-5 h-5 text-slate-500 group-focus-within:text-primary-600 transition-colors" />
                       </div>
-                      <input name="fullName" type="text" required placeholder="Jane Doe" className="block w-full pl-11 pr-4 py-3 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm" />
+                      <input name="fullName" type="text" required placeholder="Jane Doe" className="block w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm" />
                     </div>
                   </motion.div>
                 )}
                 
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-1.5">Email Address</label>
+                  <label className="block text-sm font-medium text-slate-600 mb-1.5">Email Address</label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                      <Mail className="w-5 h-5 text-zinc-500 group-focus-within:text-primary-400 transition-colors" />
+                      <Mail className="w-5 h-5 text-slate-500 group-focus-within:text-primary-600 transition-colors" />
                     </div>
-                    <input name="email" type="email" required placeholder="name@company.com" className="block w-full pl-11 pr-4 py-3 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm" />
+                    <input name="email" type="email" required placeholder="name@company.com" className="block w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-1.5">Password</label>
+                  <label className="block text-sm font-medium text-slate-600 mb-1.5">Password</label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                      <Lock className="w-5 h-5 text-zinc-500 group-focus-within:text-primary-400 transition-colors" />
+                      <Lock className="w-5 h-5 text-slate-500 group-focus-within:text-primary-600 transition-colors" />
                     </div>
-                    <input name="password" type="password" required placeholder="••••••••" className="block w-full pl-11 pr-4 py-3 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm" />
+                    <input name="password" type="password" required placeholder="••••••••" className="block w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm" />
                   </div>
                 </div>
 
@@ -211,13 +219,13 @@ export default function Auth({ setRole }) {
           <div className="mt-8 text-center">
             <button 
               onClick={() => setIsLogin(!isLogin)} 
-              className="text-zinc-400 hover:text-white text-sm transition-colors"
+              className="text-slate-600 hover:text-slate-900 text-sm transition-colors"
             >
               {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
             </button>
-            <div className="mt-6 p-4 bg-white/[0.02] border border-white/[0.05] rounded-xl inline-block text-left mx-auto">
-              <p className="text-xs text-zinc-500 leading-relaxed font-mono">
-                <strong className="text-zinc-300 font-sans">Demo Accounts:</strong><br />
+            <div className="mt-6 p-4 bg-white border border-slate-200 rounded-xl inline-block text-left mx-auto">
+              <p className="text-xs text-slate-500 leading-relaxed font-mono">
+                <strong className="text-slate-700 font-sans">Demo Accounts:</strong><br />
                 admin@dogfood.com / admin123<br />
                 judge1@dogfood.com / judge123<br />
                 p1@dogfood.com / p123

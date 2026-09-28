@@ -27,9 +27,9 @@ export default function Leaderboard() {
   const getRankIcon = (index) => {
     switch (index) {
       case 0: return <Trophy className="w-5 h-5 text-yellow-400 inline-block mr-2 drop-shadow-[0_0_10px_rgba(250,204,21,0.8)]" />;
-      case 1: return <Medal className="w-5 h-5 text-zinc-300 inline-block mr-2 drop-shadow-[0_0_10px_rgba(212,212,216,0.8)]" />;
+      case 1: return <Medal className="w-5 h-5 text-slate-700 inline-block mr-2 drop-shadow-[0_0_10px_rgba(212,212,216,0.8)]" />;
       case 2: return <Award className="w-5 h-5 text-amber-600 inline-block mr-2 drop-shadow-[0_0_10px_rgba(217,119,6,0.8)]" />;
-      default: return <span className="font-bold text-zinc-500 mr-2">{index + 1}</span>;
+      default: return <span className="font-bold text-slate-500 mr-2">{index + 1}</span>;
     }
   };
 
@@ -43,8 +43,8 @@ export default function Leaderboard() {
   return (
     <div className="p-8 max-w-7xl mx-auto min-h-[calc(100vh-80px)]">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-heading font-semibold text-white mb-4 tracking-wide">Live Scoreboard</h1>
-        <p className="text-zinc-400 font-medium tracking-wide text-sm flex items-center justify-center gap-2">
+        <h1 className="text-4xl md:text-5xl font-heading font-semibold text-slate-900 mb-4 tracking-wide">Live Scoreboard</h1>
+        <p className="text-slate-600 font-medium tracking-wide text-sm flex items-center justify-center gap-2">
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
@@ -107,32 +107,32 @@ export default function Leaderboard() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-white/[0.05] bg-white/[0.02]">
-                    <th className="p-5 text-xs font-semibold text-zinc-400 uppercase tracking-wider w-24 text-center">Place</th>
-                    <th className="p-5 text-xs font-semibold text-zinc-400 uppercase tracking-wider">Team</th>
-                    <th className="p-5 text-xs font-semibold text-zinc-400 uppercase tracking-wider">Project</th>
-                    <th className="p-5 text-xs font-semibold text-zinc-400 uppercase tracking-wider text-right">Score</th>
+                  <tr className="border-b border-slate-200 bg-white">
+                    <th className="p-5 text-xs font-semibold text-slate-600 uppercase tracking-wider w-24 text-center">Place</th>
+                    <th className="p-5 text-xs font-semibold text-slate-600 uppercase tracking-wider">Team</th>
+                    <th className="p-5 text-xs font-semibold text-slate-600 uppercase tracking-wider">Project</th>
+                    <th className="p-5 text-xs font-semibold text-slate-600 uppercase tracking-wider text-right">Score</th>
                   </tr>
                 </thead>
                 <tbody>
                   {leaderboard.map((project, index) => (
                     <tr 
                       key={project.id} 
-                      className={`border-b border-white/[0.02] hover:bg-white/[0.02] transition-colors ${index < 3 ? 'bg-primary-500/[0.02]' : ''}`}
+                      className={`border-b border-white/[0.02] hover:bg-white transition-colors ${index < 3 ? 'bg-primary-500/[0.02]' : ''}`}
                     >
-                      <td className="p-5 text-center font-semibold text-white">
+                      <td className="p-5 text-center font-semibold text-slate-900">
                         {getRankIcon(index)}
                       </td>
                       <td className="p-5">
-                        <span className={`font-semibold ${index === 0 ? 'text-primary-400' : 'text-white'}`}>
+                        <span className={`font-semibold ${index === 0 ? 'text-primary-600' : 'text-slate-900'}`}>
                           {project.team_name}
                         </span>
                       </td>
                       <td className="p-5">
-                        <span className="text-zinc-400 text-sm">{project.title}</span>
+                        <span className="text-slate-600 text-sm">{project.title}</span>
                       </td>
                       <td className="p-5 text-right">
-                        <span className="text-xl font-heading font-semibold text-white">
+                        <span className="text-xl font-heading font-semibold text-slate-900">
                           {project.score.toFixed(1)}
                         </span>
                       </td>
@@ -140,7 +140,7 @@ export default function Leaderboard() {
                   ))}
                   {leaderboard.length === 0 && (
                     <tr>
-                      <td colSpan="4" className="p-8 text-center text-zinc-500">
+                      <td colSpan="4" className="p-8 text-center text-slate-500">
                         No projects ranked yet.
                       </td>
                     </tr>

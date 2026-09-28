@@ -50,7 +50,7 @@ export default function Gallery() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-bg-darker text-white font-sans selection:bg-primary-500 selection:text-black pb-20 relative overflow-x-hidden"
+      className="min-h-screen bg-bg-darker text-slate-900 font-sans selection:bg-primary-500 selection:text-black pb-20 relative overflow-x-hidden"
     >
       {/* Cyberpunk Background Effects */}
       <div className="absolute inset-0 z-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20" />
@@ -69,7 +69,7 @@ export default function Gallery() {
             <span className="text-xl neon-text tracking-widest uppercase">Dogfood_OS</span>
           </Link>
           <div className="flex items-center gap-4">
-            <Link to="/" className="text-sm font-medium text-zinc-300 hover:text-white transition-colors">Login / Register</Link>
+            <Link to="/" className="text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors">Login / Register</Link>
           </div>
         </div>
       </nav>
@@ -95,7 +95,7 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-primary-200/60 font-mono max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-lg text-primary-800/60 font-mono max-w-2xl mx-auto mb-10 leading-relaxed"
           >
             &gt; INDEXING COMPLETED SUBMISSIONS...<br/>
             &gt; ACCESSING OPEN-SOURCE PROTOCOLS...
@@ -115,7 +115,7 @@ export default function Gallery() {
               placeholder="Query database..." 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="block w-full pl-14 pr-6 py-4 bg-black/40 border border-primary-500/30 rounded-none text-white placeholder-zinc-600 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all shadow-[0_0_15px_rgba(0,240,255,0.1)] font-mono text-sm"
+              className="block w-full pl-14 pr-6 py-4 bg-black/40 border border-primary-500/30 rounded-none text-slate-900 placeholder-slate-400 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all shadow-[0_0_15px_rgba(0,240,255,0.1)] font-mono text-sm"
             />
           </motion.div>
         </div>
@@ -141,7 +141,7 @@ export default function Gallery() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-darker via-bg-darker/80 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
                 <div className="absolute bottom-4 left-6 flex items-center gap-3">
-                  <span className="px-3 py-1 bg-black/60 border border-primary-500/50 text-xs font-mono font-bold text-primary-400 uppercase tracking-widest shadow-[0_0_10px_rgba(0,240,255,0.3)]">
+                  <span className="px-3 py-1 bg-black/60 border border-primary-500/50 text-xs font-mono font-bold text-primary-600 uppercase tracking-widest shadow-[0_0_10px_rgba(0,240,255,0.3)]">
                     {project.track}
                   </span>
                 </div>
@@ -150,24 +150,24 @@ export default function Gallery() {
               <div className="p-8 flex-1 flex flex-col relative z-10 -mt-10">
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div>
-                    <h3 className="text-2xl font-heading font-bold text-white mb-1 group-hover:text-primary-400 transition-colors uppercase tracking-tight">{project.name}</h3>
+                    <h3 className="text-2xl font-heading font-bold text-slate-900 mb-1 group-hover:text-primary-600 transition-colors uppercase tracking-tight">{project.name}</h3>
                     <p className="text-primary-500/70 text-xs font-mono font-bold uppercase tracking-wider">{project.tagline}</p>
                   </div>
                   <div className="flex gap-2">
                     {project.repo_url && (
-                      <a href={project.repo_url} target="_blank" rel="noreferrer" className="p-2 bg-black/50 border border-primary-500/30 hover:border-primary-500 transition-colors text-primary-400 hover:text-primary-300" title="Source">
+                      <a href={project.repo_url} target="_blank" rel="noreferrer" className="p-2 bg-black/50 border border-primary-500/30 hover:border-primary-500 transition-colors text-primary-600 hover:text-primary-300" title="Source">
                         <GitBranch className="w-5 h-5" />
                       </a>
                     )}
                     {project.demo_url && (
-                      <a href={project.demo_url} target="_blank" rel="noreferrer" className="p-2 bg-secondary-500 hover:bg-secondary-400 transition-colors text-white shadow-[0_0_10px_rgba(255,0,60,0.3)] border border-secondary-400" title="Execute Demo">
+                      <a href={project.demo_url} target="_blank" rel="noreferrer" className="p-2 bg-secondary-500 hover:bg-secondary-400 transition-colors text-slate-900 shadow-[0_0_10px_rgba(255,0,60,0.3)] border border-secondary-400" title="Execute Demo">
                         <Play className="w-5 h-5" />
                       </a>
                     )}
                   </div>
                 </div>
                 
-                <p className="text-zinc-400 leading-relaxed mb-6 flex-1 text-sm">
+                <p className="text-slate-600 leading-relaxed mb-6 flex-1 text-sm">
                   {project.description}
                 </p>
                 
@@ -176,7 +176,7 @@ export default function Gallery() {
                     <div className="w-8 h-8 bg-black/50 flex items-center justify-center border border-primary-500/30">
                       <Users className="w-4 h-4 text-primary-500" />
                     </div>
-                    <span className="text-xs font-mono font-bold text-primary-200 uppercase tracking-widest">{project.team}</span>
+                    <span className="text-xs font-mono font-bold text-primary-800 uppercase tracking-widest">{project.team}</span>
                   </div>
                   <a href="#" className="text-xs font-mono font-bold text-secondary-500 hover:text-secondary-400 transition-colors flex items-center gap-1 group/link uppercase tracking-widest">
                     Access <ExternalLink className="w-3 h-3 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
@@ -194,7 +194,7 @@ export default function Gallery() {
             className="text-center py-20 glass-panel neon-border"
           >
             <Search className="w-12 h-12 text-primary-500/50 mx-auto mb-4" />
-            <h3 className="text-xl font-heading font-bold text-primary-400 mb-2 uppercase tracking-widest">NO_RECORDS_FOUND</h3>
+            <h3 className="text-xl font-heading font-bold text-primary-600 mb-2 uppercase tracking-widest">NO_RECORDS_FOUND</h3>
             <p className="text-primary-500/50 font-mono text-sm">&gt; Modify query parameters.</p>
           </motion.div>
         )}
