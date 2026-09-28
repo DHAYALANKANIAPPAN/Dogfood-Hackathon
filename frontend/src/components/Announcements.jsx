@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Megaphone, AlertTriangle, Clock, Plus, X } from 'lucide-react';
+import { Megaphone, AlertTriangle, Clock, Plus, X, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Announcements({ role }) {
@@ -55,6 +55,19 @@ export default function Announcements({ role }) {
       console.error("Failed to post announcement", err);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const deleteAnnouncement = async (id) => {
+    if (!confirm('Delete this announcement?')) return;
+    try {
+      const res = await fetch(`http://localhost:8000/api/announcements/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` }
+      });
+      if (res.ok) fetchAnnouncements();
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -161,11 +174,22 @@ export default function Announcements({ role }) {
                   </div>
                 </div>
                 <p className="text-zinc-300 leading-relaxed whitespace-pre-wrap">{ann.content}</p>
-                <div className="mt-4 pt-4 border-t border-white/[0.05] flex items-center gap-2 text-xs text-zinc-500">
-                  <span className="w-6 h-6 rounded-full bg-white/[0.05] flex items-center justify-center font-semibold text-zinc-400">
-                    {ann.author_name.charAt(0)}
-                  </span>
-                  Posted by {ann.author_name}
+                <div className="mt-4 pt-4 border-t border-white/[0.05] flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs text-zinc-500">
+                    <span className="w-6 h-6 rounded-full bg-white/[0.05] flex items-center justify-center font-semibold text-zinc-400">
+                      {ann.author_name.charAt(0)}
+                    </span>
+                    Posted by {ann.author_name}
+                  </div>
+                  
+                  {(role === 'admin' || role === 'organizer') && (
+                    <button 
+                      onClick={() => deleteAnnouncement(ann.id)}
+                      className="p-1.5 bg-red-500/5 hover:bg-red-500/20 text-red-400/50 hover:text-red-400 rounded transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  )}
                 </div>
               </div>
             </motion.div>

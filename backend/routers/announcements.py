@@ -66,3 +66,16 @@ def get_announcements(db: Session = Depends(get_db)):
             "author_name": author.full_name if author else "System"
         })
     return result
+
+@router.delete("/{announcement_id}")
+def delete_announcement(announcement_id: uuid.UUID, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    if current_user.role not in [RoleEnum.ADMIN, RoleEnum.ORGANIZER]:
+        raise HTTPException(status_code=403, detail="Not authorized to delete announcements")
+        
+    ann = db.query(Announcement).filter(Announcement.id == announcement_id).first()
+    if not ann:
+        raise HTTPException(status_code=404, detail="Announcement not found")
+        
+    db.delete(ann)
+    db.commit()
+    return {"message": "Deleted successfully"}

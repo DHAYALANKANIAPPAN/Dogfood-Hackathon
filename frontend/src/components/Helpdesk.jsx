@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HelpCircle, MapPin, MessageSquare, Clock, CheckCircle2, ChevronRight, X, AlertCircle } from 'lucide-react';
+import { HelpCircle, MapPin, MessageSquare, Clock, CheckCircle2, ChevronRight, X, AlertCircle, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Helpdesk({ role }) {
@@ -78,6 +78,19 @@ export default function Helpdesk({ role }) {
     }
   };
 
+  const deleteRequest = async (id) => {
+    if (!confirm('Delete this request?')) return;
+    try {
+      const res = await fetch(`http://localhost:8000/api/help-requests/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` }
+      });
+      if (res.ok) fetchRequests();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="bg-white/[0.02] border border-white/[0.05] rounded-3xl p-8 mt-8 animate-in fade-in slide-in-from-bottom-4 relative">
       <div className="flex items-center justify-between mb-8">
@@ -143,22 +156,34 @@ export default function Helpdesk({ role }) {
                 </div>
               </div>
 
-              {(role === 'admin' || role === 'judge') && req.status !== 'RESOLVED' && (
+              {(role === 'admin' || role === 'judge') && (
                 <div className="flex gap-2 mt-4 pt-4 border-t border-white/[0.05]">
-                  {req.status === 'OPEN' && (
+                  {req.status !== 'RESOLVED' && (
+                    <>
+                      {req.status === 'OPEN' && (
+                        <button 
+                          onClick={() => updateStatus(req.id, 'IN_PROGRESS')}
+                          className="flex-1 py-2 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-400 text-xs font-medium rounded-lg transition-colors"
+                        >
+                          Claim Ticket
+                        </button>
+                      )}
+                      <button 
+                        onClick={() => updateStatus(req.id, 'RESOLVED')}
+                        className="flex-1 py-2 bg-green-500/10 hover:bg-green-500/20 text-green-400 text-xs font-medium rounded-lg transition-colors"
+                      >
+                        Mark Resolved
+                      </button>
+                    </>
+                  )}
+                  {role === 'admin' && (
                     <button 
-                      onClick={() => updateStatus(req.id, 'IN_PROGRESS')}
-                      className="flex-1 py-2 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-400 text-xs font-medium rounded-lg transition-colors"
+                      onClick={() => deleteRequest(req.id)}
+                      className="px-3 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-medium rounded-lg transition-colors"
                     >
-                      Claim Ticket
+                      <Trash2 className="w-4 h-4" />
                     </button>
                   )}
-                  <button 
-                    onClick={() => updateStatus(req.id, 'RESOLVED')}
-                    className="flex-1 py-2 bg-green-500/10 hover:bg-green-500/20 text-green-400 text-xs font-medium rounded-lg transition-colors"
-                  >
-                    Mark Resolved
-                  </button>
                 </div>
               )}
             </div>

@@ -88,3 +88,16 @@ def update_request_status(request_id: uuid.UUID, status: HelpRequestStatus, curr
         
     db.commit()
     return {"message": "Status updated successfully"}
+
+@router.delete("/{request_id}")
+def delete_help_request(request_id: uuid.UUID, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    if current_user.role not in [RoleEnum.ADMIN, RoleEnum.ORGANIZER]:
+        raise HTTPException(status_code=403, detail="Not authorized to delete help requests")
+        
+    req = db.query(HelpRequest).filter(HelpRequest.id == request_id).first()
+    if not req:
+        raise HTTPException(status_code=404, detail="Help request not found")
+        
+    db.delete(req)
+    db.commit()
+    return {"message": "Deleted successfully"}

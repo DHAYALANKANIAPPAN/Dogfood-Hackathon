@@ -123,3 +123,14 @@ class Announcement(Base):
     author_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
 
     author = relationship("User")
+
+class ProblemStatement(Base):
+    __tablename__ = "problem_statements"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    title = Column(String, nullable=False)
+    description = Column(String, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    author_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+
+    author = relationship("User")
