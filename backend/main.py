@@ -1,13 +1,22 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
 import auth
 import api
+from security import limiter
 
 app = FastAPI(
     title="Dogfood Hackathon API",
     description="Offline-first hackathon submission and judging platform API.",
     version="1.0.0"
 )
+
+# Apply Anti-Abuse Rate Limiter
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_middleware(SlowAPIMiddleware)
 
 # Allow frontend to communicate with backend
 app.add_middleware(
