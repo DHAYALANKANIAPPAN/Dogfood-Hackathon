@@ -1,17 +1,11 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Dog } from 'lucide-react';
 
 export default function Navbar({ role, onLogout }) {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const isActive = (path) => {
     return location.pathname === path ? "text-white" : "text-zinc-400 hover:text-white";
-  };
-
-  const handleLogout = () => {
-    onLogout();
-    navigate('/auth');
   };
 
   return (
@@ -26,10 +20,14 @@ export default function Navbar({ role, onLogout }) {
             
             <div className="hidden md:block ml-10">
               <div className="flex items-center space-x-6 text-sm font-medium">
-                <Link to="/users" className={`transition-colors ${isActive('/users')}`}>Users</Link>
-                <Link to="/teams" className={`transition-colors ${isActive('/teams')}`}>Teams</Link>
+                {role && (
+                  <>
+                    <Link to="/users" className={`transition-colors ${isActive('/users')}`}>Users</Link>
+                    <Link to="/teams" className={`transition-colors ${isActive('/teams')}`}>Teams</Link>
+                    <Link to="/challenges" className={`transition-colors ${isActive('/challenges')}`}>Challenges</Link>
+                  </>
+                )}
                 <Link to="/scoreboard" className={`transition-colors ${isActive('/scoreboard')}`}>Scoreboard</Link>
-                <Link to="/challenges" className={`transition-colors ${isActive('/challenges')}`}>Challenges</Link>
               </div>
             </div>
           </div>
@@ -47,7 +45,7 @@ export default function Navbar({ role, onLogout }) {
                   {role === 'participant' && (
                     <Link to="/dashboard" className={`transition-colors ${isActive('/dashboard')}`}>Dashboard</Link>
                   )}
-                  <button onClick={handleLogout} className="text-zinc-400 hover:text-white transition-colors">Logout</button>
+                  <button onClick={onLogout} className="text-zinc-400 hover:text-white transition-colors">Logout</button>
                 </>
               ) : (
                 <>

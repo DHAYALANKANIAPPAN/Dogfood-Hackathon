@@ -19,6 +19,7 @@ function App() {
     setRole(null);
     localStorage.removeItem('access_token');
     localStorage.removeItem('role');
+    window.location.href = '/';
   };
 
   return (
@@ -29,15 +30,15 @@ function App() {
           <Route path="/" element={<Home role={role} />} />
           <Route path="/auth" element={!role ? <Auth setRole={setRole} /> : <Navigate to="/dashboard" replace />} />
           
-          <Route path="/challenges" element={<Challenges />} />
+          <Route path="/challenges" element={role ? <Challenges /> : <Navigate to="/auth" replace />} />
           <Route path="/dashboard" element={role ? <Dashboard role={role} setRole={setRole} /> : <Navigate to="/auth" replace />} />
           <Route path="/admin" element={role === 'admin' ? <Dashboard role={role} setRole={setRole} /> : <Navigate to="/" replace />} />
           <Route path="/judge" element={role === 'judge' ? <Dashboard role={role} setRole={setRole} /> : <Navigate to="/" replace />} />
           
           <Route path="/gallery" element={(role === 'admin' || role === 'judge') ? <Gallery /> : <Navigate to="/" replace />} />
           <Route path="/scoreboard" element={<Leaderboard />} />
-          <Route path="/users" element={<PublicUsers />} />
-          <Route path="/teams" element={<PublicTeams />} />
+          <Route path="/users" element={role ? <PublicUsers /> : <Navigate to="/auth" replace />} />
+          <Route path="/teams" element={role ? <PublicTeams /> : <Navigate to="/auth" replace />} />
           
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
