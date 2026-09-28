@@ -28,7 +28,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://dogfood:dogfood_password@db:5432/dogfood_db
+      - DATABASE_URL=postgresql+psycopg2://dogfood:dogfood_password@db:5432/dogfood_db
       - JWT_SECRET_KEY=super_secret_offline_key_for_hackathon
     restart: unless-stopped
 
