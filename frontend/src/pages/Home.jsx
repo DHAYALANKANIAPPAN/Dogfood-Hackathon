@@ -64,8 +64,8 @@ export default function Home() {
           </h1>
           
           <div className="mt-10 border-l-4 border-primary-500 pl-6 py-2">
-            <p className="text-lg md:text-xl text-text-muted max-w-lg font-mono leading-relaxed">
-              35 hackathons in, across 85 countries. The open-source platform that runs them starts here.
+            <p className="text-lg md:text-2xl text-text-muted max-w-lg font-mono font-bold uppercase tracking-widest leading-relaxed">
+              Learn. Build. Sleep. Repeat.
             </p>
           </div>
         </motion.div>
