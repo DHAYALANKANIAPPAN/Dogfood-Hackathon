@@ -5,18 +5,20 @@ import Rules from '../components/Rules';
 
 export default function Home({ role }) {
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-slate-50 text-slate-900 flex flex-col items-center justify-center p-6 text-center">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-bg-dark text-text-main flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+      {/* Scanlines effect */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-10 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,229,208,0.2)_3px,rgba(0,229,208,0.2)_4px)]" />
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-3xl flex flex-col items-center"
       >
         <AnimatedDog className="mb-10" />
-        <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6 tracking-tight">
-          <span className="text-primary-600">Dogfood</span> <span className="text-red-500">Hackathon</span>
+        <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6 tracking-tight neon-text">
+          <span className="text-primary-500">Dogfood</span> <span className="text-secondary-500">Hackathon</span>
         </h1>
-        <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-          Welcome to the ultimate dogfooding event. Build, test, and break our own tools before they reach the customers.
+        <p className="text-xl text-text-muted mb-10 max-w-2xl mx-auto leading-relaxed font-mono-vt tracking-widest uppercase">
+          Build the platform that will judge you.
         </p>
         
         <div className="flex flex-wrap items-center justify-center gap-4">
@@ -24,19 +26,19 @@ export default function Home({ role }) {
             <>
               <Link 
                 to="/auth?mode=register"
-                className="px-8 py-3 bg-primary-600 hover:bg-primary-500 text-white rounded-md text-sm font-semibold transition-colors"
+                className="px-8 py-3 bg-secondary-500 hover:bg-secondary-400 text-bg-dark rounded-none border border-secondary-500 text-sm font-bold font-mono tracking-widest uppercase transition-colors"
               >
                 Register Now
               </Link>
               <Link 
                 to="/auth"
-                className="px-8 py-3 bg-slate-200 hover:bg-slate-300 text-slate-900 rounded-md text-sm font-semibold transition-colors"
+                className="px-8 py-3 bg-transparent hover:bg-bg-card border border-primary-500 text-primary-500 rounded-none text-sm font-bold font-mono tracking-widest uppercase transition-colors"
               >
                 Login
               </Link>
               <Link 
                 to="/gallery"
-                className="px-8 py-3 bg-white border border-slate-300 hover:bg-slate-50 text-slate-900 rounded-md text-sm font-semibold transition-colors"
+                className="px-8 py-3 bg-transparent hover:bg-bg-card border border-primary-500 text-primary-500 rounded-none text-sm font-bold font-mono tracking-widest uppercase transition-colors"
               >
                 View Gallery
               </Link>
@@ -44,7 +46,7 @@ export default function Home({ role }) {
           ) : (
             <Link 
               to="/challenges"
-              className="px-8 py-3 bg-primary-600 hover:bg-primary-500 text-white rounded-md text-sm font-semibold transition-colors"
+              className="px-8 py-3 bg-secondary-500 hover:bg-secondary-400 text-bg-dark rounded-none border border-secondary-500 text-sm font-bold font-mono tracking-widest uppercase transition-colors"
             >
               Enter Event
             </Link>

@@ -5,17 +5,16 @@ export default function Navbar({ role, onLogout }) {
   const location = useLocation();
 
   const isActive = (path) => {
-    return location.pathname === path ? "text-slate-900" : "text-slate-600 hover:text-slate-900";
+    return location.pathname === path ? "text-text-main neon-text" : "text-text-muted hover:text-text-main";
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white border-b border-slate-200">
+    <nav className="sticky top-0 z-50 w-full bg-bg-dark border-b border-primary-500 font-mono text-sm uppercase tracking-widest">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-2 font-heading font-bold text-lg tracking-wide">
-              <Dog className="w-5 h-5 text-primary-600" />
-              <span className="text-primary-600">DOG</span><span className="text-red-500">FOOD</span>
+              <span className="text-primary-500">DOGFOOD</span><span className="text-secondary-500">®</span>
             </Link>
             
             <div className="hidden md:block ml-10">
@@ -46,7 +45,7 @@ export default function Navbar({ role, onLogout }) {
                   {role === 'participant' && (
                     <Link to="/dashboard" className={`transition-colors ${isActive('/dashboard')}`}>Dashboard</Link>
                   )}
-                  <button onClick={onLogout} className="text-slate-600 hover:text-slate-900 transition-colors">Logout</button>
+                  <button onClick={onLogout} className="text-secondary-500 hover:text-secondary-400 transition-colors uppercase tracking-widest">Logout</button>
                 </>
               ) : (
                 <>

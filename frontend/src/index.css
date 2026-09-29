@@ -1,23 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@600;800&family=VT323&family=Space+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-primary-100: #e0e7ff;
-  --color-primary-200: #c7d2fe;
-  --color-primary-300: #a5b4fc;
-  --color-primary-400: #818cf8;
-  --color-primary-500: #6366f1; /* Modern Indigo */
-  --color-primary-600: #4f46e5;
+  --color-primary-400: #00E5D0;
+  --color-primary-500: #00E5D0; /* Cyan/Teal */
+  --color-primary-600: #00E5D0;
   
-  --color-secondary-500: #f43f5e; /* Modern Rose */
-  --color-secondary-600: #e11d48;
+  --color-secondary-400: #FF3D6E;
+  --color-secondary-500: #FF3D6E; /* Pink/Red */
+  --color-secondary-600: #FF3D6E;
   
-  --color-bg-dark: #0a0a0a;
-  --color-bg-darker: #050505;
-  --color-bg-card: rgba(20, 20, 20, 0.7);
+  --color-bg-dark: #0B1020;
+  --color-bg-darker: #0E1428;
+  --color-bg-card: #1B2540;
+  --color-bg-card-hover: #26355C;
   
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-heading: 'Space Grotesk', sans-serif;
+  --color-text-main: #E6ECFF;
+  --color-text-muted: #AEBAD6;
+  --color-text-darker: #6B7A9E;
+  
+  --font-sans: 'Syne', sans-serif;
+  --font-heading: 'Archivo Black', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-mono-vt: 'VT323', monospace;
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-fade-in: fadeIn 0.5s ease-out forwards;
@@ -25,23 +30,21 @@
 
 @layer base {
   body {
-    @apply bg-bg-dark text-zinc-300 font-sans antialiased overflow-x-hidden;
-    /* Soft mesh/grain background */
-    background-image: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
-                      radial-gradient(circle at 100% 100%, rgba(244, 63, 94, 0.05) 0%, transparent 50%);
-    background-attachment: fixed;
+    @apply bg-bg-dark text-text-main font-mono antialiased overflow-x-hidden;
+    /* Dogfood grain and scanlines effect can be applied via components */
   }
 }
 
 @layer utilities {
   .glass-panel {
-    @apply bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] shadow-lg;
+    @apply bg-bg-darker border border-bg-card;
   }
-  .gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-400 font-heading font-semibold;
+  .neon-text {
+    @apply text-text-main font-heading uppercase;
+    text-shadow: 0 0 10px rgba(0,229,208,0.3);
   }
-  .primary-gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-600 font-heading font-semibold;
+  .neon-border {
+    @apply border border-primary-500 shadow-[0_0_15px_rgba(0,229,208,0.1)];
   }
 }
 

@@ -25,7 +25,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-slate-50 text-slate-900 font-sans overflow-x-hidden relative">
+      <div className="min-h-screen bg-bg-dark text-text-main font-mono overflow-x-hidden relative">
         {/* Universal Animated Dog Background */}
         <div className="fixed inset-0 z-0 flex items-center justify-center opacity-[0.03] pointer-events-none scale-[1.5] sm:scale-[2] md:scale-[2.5]">
           <AnimatedDog />

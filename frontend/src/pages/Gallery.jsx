@@ -60,7 +60,7 @@ export default function Gallery({ role }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-primary-500 selection:text-black pb-20 relative overflow-x-hidden"
+      className="min-h-screen bg-bg-dark text-text-main font-mono selection:bg-primary-500 selection:text-black pb-20 relative overflow-x-hidden"
     >
       {/* Cyberpunk Background Effects */}
       <div className="absolute inset-0 z-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20" />
@@ -107,7 +107,7 @@ export default function Gallery({ role }) {
               placeholder="Query database..." 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="block w-full pl-14 pr-6 py-4 bg-black/40 border border-primary-500/30 rounded-none text-slate-900 placeholder-slate-400 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all shadow-[0_0_15px_rgba(0,240,255,0.1)] font-mono text-sm"
+              className="block w-full pl-14 pr-6 py-4 bg-bg-darker border border-primary-500/30 rounded-none text-text-main placeholder-text-muted focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all shadow-[0_0_15px_rgba(0,240,255,0.1)] font-mono text-sm"
             />
           </motion.div>
         </div>
@@ -128,7 +128,7 @@ export default function Gallery({ role }) {
               <div className="p-8 flex-1 flex flex-col relative z-10">
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div>
-                    <h3 className="text-2xl font-heading font-bold text-slate-900 mb-1 group-hover:text-primary-600 transition-colors uppercase tracking-tight">{project.name}</h3>
+                    <h3 className="text-2xl font-heading font-bold text-text-main mb-1 group-hover:text-primary-500 transition-colors uppercase tracking-tight">{project.name}</h3>
                     <p className="text-primary-500/70 text-xs font-mono font-bold uppercase tracking-wider">{project.tagline}</p>
                   </div>
                   <div className="flex gap-2">
@@ -138,14 +138,14 @@ export default function Gallery({ role }) {
                       </a>
                     )}
                     {project.demo_url && (
-                      <a href={project.demo_url} target="_blank" rel="noreferrer" className="p-2 bg-secondary-500 hover:bg-secondary-400 transition-colors text-slate-900 shadow-[0_0_10px_rgba(255,0,60,0.3)] border border-secondary-400" title="Execute Demo">
+                      <a href={project.demo_url} target="_blank" rel="noreferrer" className="p-2 bg-secondary-500 hover:bg-secondary-400 transition-colors text-bg-dark shadow-[0_0_10px_rgba(255,0,60,0.3)] border border-secondary-400" title="Execute Demo">
                         <Play className="w-5 h-5" />
                       </a>
                     )}
                   </div>
                 </div>
                 
-                <p className="text-slate-600 leading-relaxed mb-6 flex-1 text-sm">
+                <p className="text-text-muted leading-relaxed mb-6 flex-1 text-sm">
                   {project.description}
                 </p>
                 
@@ -161,9 +161,9 @@ export default function Gallery({ role }) {
                       const assignment = assignments.find(a => a.project_id === project.id);
                       if (!assignment) return null;
                       return assignment.is_submitted ? (
-                        <span className="text-green-600 text-xs font-bold px-3 py-1 bg-green-50 border border-green-200 rounded">Scored: {assignment.score}</span>
+                        <span className="text-primary-500 text-xs font-mono font-bold px-3 py-1 border border-primary-500 uppercase tracking-widest rounded-none">Scored: {assignment.score}</span>
                       ) : (
-                        <button onClick={() => setScoringAssignment(assignment)} className="text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 px-3 py-1 rounded transition-colors shadow-md">Score Project</button>
+                        <button onClick={() => setScoringAssignment(assignment)} className="text-xs font-mono font-bold text-bg-dark bg-secondary-500 hover:bg-secondary-400 px-3 py-1 rounded-none transition-colors border border-secondary-500 uppercase tracking-widest">Score Project</button>
                       );
                     })()}
                     <a href="#" className="text-xs font-mono font-bold text-secondary-500 hover:text-secondary-400 transition-colors flex items-center gap-1 group/link uppercase tracking-widest">
