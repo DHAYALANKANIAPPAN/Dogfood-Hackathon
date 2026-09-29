@@ -206,8 +206,8 @@ export default function Dashboard({ role, setRole }) {
                   >
                     {judgeTab === 'assignments' && (
                       <div className="bg-slate-100 border border-slate-200 rounded-3xl p-8 backdrop-blur-md">
-                        <h2 className="text-2xl font-heading font-bold mb-6 flex items-center gap-3 text-blue-100">
-                          <Gavel className="w-6 h-6 text-blue-400" /> Judging Panel
+                        <h2 className="text-2xl font-heading font-bold mb-6 flex items-center gap-3 text-slate-800">
+                          <Gavel className="w-6 h-6 text-blue-500" /> Judging Panel
                         </h2>
                         <p className="text-slate-600 mb-8">Projects assigned to you for evaluation. Validate their work by checking their local GitHub profiles.</p>
                         
@@ -215,18 +215,18 @@ export default function Dashboard({ role, setRole }) {
                           {assignments.length === 0 ? (
                             <p className="text-slate-500 italic">No assignments yet. Wait for admin to run algorithms.</p>
                           ) : assignments.map(a => (
-                            <motion.div whileHover={{ scale: 1.01 }} key={a.assignment_id} className="bg-bg-darker p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-blue-500/30 transition-colors group shadow-lg">
+                            <motion.div whileHover={{ scale: 1.01 }} key={a.assignment_id} className="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-blue-500/30 transition-colors group shadow-sm">
                               <div>
-                                <h3 className="text-lg font-medium text-slate-900 group-hover:text-blue-300 transition-colors">{a.name}</h3>
+                                <h3 className="text-lg font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">{a.name}</h3>
                                 <p className="text-sm text-slate-500 mt-1">Submitted by {a.team}</p>
                               </div>
                               <div className="flex gap-3 items-center">
                                 {a.is_submitted ? (
-                                  <span className="text-green-400 text-sm font-bold bg-green-400/10 px-4 py-2 rounded-xl border border-green-400/20">Scored: {a.score}</span>
+                                  <span className="text-green-600 text-sm font-bold bg-green-50 px-4 py-2 rounded-xl border border-green-200">Scored: {a.score}</span>
                                 ) : (
                                   <>
-                                    <a href={a.repo_url} target="_blank" rel="noreferrer" className="px-4 py-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl text-sm font-medium transition-colors">View Repo</a>
-                                    <button onClick={() => setScoringAssignment(a)} className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-slate-900 rounded-xl text-sm font-medium shadow-lg shadow-blue-500/20 transition-colors">Score Project</button>
+                                    <a href={a.repo_url} target="_blank" rel="noreferrer" className="px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-sm font-medium text-slate-700 transition-colors shadow-sm">View Repo</a>
+                                    <button onClick={() => setScoringAssignment(a)} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium shadow-md shadow-blue-500/20 transition-all">Score Project</button>
                                   </>
                                 )}
                               </div>
