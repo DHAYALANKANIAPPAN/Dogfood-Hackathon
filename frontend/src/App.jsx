@@ -34,7 +34,7 @@ function App() {
         <div className="relative z-10 flex flex-col min-h-screen">
           <Navbar role={role} onLogout={handleLogout} />
         <Routes>
-          <Route path="/" element={<Home role={role} />} />
+          <Route path="/" element={<Navigate to="/gallery" replace />} />
           <Route path="/auth" element={!role ? <Auth setRole={setRole} /> : <Navigate to="/dashboard" replace />} />
           
           <Route path="/challenges" element={role ? <Challenges /> : <Navigate to="/auth" replace />} />
@@ -42,7 +42,7 @@ function App() {
           <Route path="/admin" element={role === 'admin' ? <Dashboard role={role} setRole={setRole} /> : <Navigate to="/" replace />} />
           <Route path="/judge" element={role === 'judge' ? <Dashboard role={role} setRole={setRole} /> : <Navigate to="/" replace />} />
           
-          <Route path="/gallery" element={(role === 'admin' || role === 'judge') ? <Gallery role={role} /> : <Navigate to="/" replace />} />
+          <Route path="/gallery" element={<Gallery role={role} />} />
           <Route path="/scoreboard" element={<Leaderboard />} />
           <Route path="/users" element={role ? <PublicUsers /> : <Navigate to="/auth" replace />} />
           <Route path="/teams" element={role ? <PublicTeams /> : <Navigate to="/auth" replace />} />

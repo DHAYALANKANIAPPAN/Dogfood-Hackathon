@@ -66,25 +66,7 @@ export default function Gallery({ role }) {
     >
       {/* Cyberpunk Background Effects */}
       <div className="absolute inset-0 z-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20" />
-      <div className="absolute top-[-100%] right-[-10%] w-[50%] h-[50%] bg-primary-600/10 blur-[150px] rounded-full mix-blend-screen animate-blob" />
-      <div className="absolute bottom-[-100%] left-[-10%] w-[40%] h-[40%] bg-secondary-600/10 blur-[150px] rounded-full mix-blend-screen animate-blob animation-delay-2000" />
-
-      {/* Navigation */}
-      <nav className="relative z-10 border-b border-primary-500/20 bg-black/60 backdrop-blur-xl sticky top-0">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
-            <div 
-              className="w-10 h-10 rounded-sm bg-primary-500/20 border border-primary-500 flex items-center justify-center shadow-[0_0_10px_rgba(0,240,255,0.2)] group-hover:bg-primary-500 transition-colors"
-            >
-              <Code2 className="w-5 h-5 text-primary-500 group-hover:text-black transition-colors" />
-            </div>
-            <span className="text-xl neon-text tracking-widest uppercase">Dogfood_OS</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link to="/" className="text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors">Login / Register</Link>
-          </div>
-        </div>
-      </nav>
+      {/* Removed duplicate navigation to rely on App.jsx Navbar */}
 
       <main className="relative z-10 max-w-7xl mx-auto px-6 pt-16">
         <div className="text-center mb-16">

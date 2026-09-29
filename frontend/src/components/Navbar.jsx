@@ -27,6 +27,7 @@ export default function Navbar({ role, onLogout }) {
                     <Link to="/challenges" className={`transition-colors ${isActive('/challenges')}`}>Challenges</Link>
                   </>
                 )}
+                <Link to="/gallery" className={`transition-colors ${isActive('/gallery')}`}>Gallery</Link>
                 <Link to="/scoreboard" className={`transition-colors ${isActive('/scoreboard')}`}>Scoreboard</Link>
               </div>
             </div>
