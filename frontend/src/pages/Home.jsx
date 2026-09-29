@@ -76,20 +76,21 @@ export default function Home() {
           {/* Abstract shadow/glow behind the card */}
           <div className="absolute inset-0 bg-gradient-to-tr from-primary-500/20 via-transparent to-secondary-500/20 rounded-3xl transform rotate-3 scale-105 blur-xl -z-10" />
           
-          <div className="bg-bg-darker/80 backdrop-blur-xl border border-bg-card shadow-2xl p-10 rounded-2xl relative overflow-hidden group hover:border-primary-500/50 transition-colors duration-500">
-            {/* Corner Accents */}
-            <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-primary-500 rounded-tl-xl opacity-50 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-secondary-500 rounded-br-xl opacity-50 group-hover:opacity-100 transition-opacity" />
-            
-            <div className="flex justify-center mb-12 transform group-hover:scale-105 transition-transform duration-500">
+          <div className="bg-bg-darker/80 backdrop-blur-xl border border-bg-card shadow-2xl p-10 rounded-2xl relative overflow-hidden group hover:border-primary-500/50 transition-colors duration-500 min-h-[400px] flex flex-col items-center justify-center">
+            {/* Background Dog Watermark */}
+            <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.06] pointer-events-none scale-150 group-hover:scale-110 transition-transform duration-1000">
               <AnimatedDog />
             </div>
 
+            {/* Corner Accents */}
+            <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-primary-500 rounded-tl-xl opacity-50 group-hover:opacity-100 transition-opacity z-10" />
+            <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-secondary-500 rounded-br-xl opacity-50 group-hover:opacity-100 transition-opacity z-10" />
+            
             <div className="relative z-10 flex flex-col items-center justify-center text-center">
-              <h3 className="text-3xl font-black font-heading text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-2">
+              <h3 className="text-4xl font-black font-heading text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-4">
                 Ready to build?
               </h3>
-              <p className="text-text-muted font-medium">
+              <p className="text-text-muted font-medium text-lg max-w-[250px] leading-relaxed">
                 Turn caffeine into code. 72 hours on the clock.
               </p>
             </div>
