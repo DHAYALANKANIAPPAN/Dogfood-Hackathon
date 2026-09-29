@@ -54,3 +54,21 @@
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Quick Hackathon Dark Theme Override */
+html.dark-theme {
+  filter: invert(1) hue-rotate(180deg);
+  background-color: #111;
+}
+
+/* Revert inversion for images and media so they don't look weird */
+html.dark-theme img,
+html.dark-theme video,
+html.dark-theme svg {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Ensure the navbar background adjusts cleanly */
+html.dark-theme nav {
+  background-color: #fafafa;
+}

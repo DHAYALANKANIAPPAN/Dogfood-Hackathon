@@ -1,7 +1,27 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Dog } from 'lucide-react';
+import { Dog, Sun, Moon } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function Navbar({ role, onLogout }) {
+  
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    if (document.documentElement.classList.contains('dark-theme')) {
+      setIsDark(true);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    if (isDark) {
+      document.documentElement.classList.remove('dark-theme');
+      setIsDark(false);
+    } else {
+      document.documentElement.classList.add('dark-theme');
+      setIsDark(true);
+    }
+  };
+
   const location = useLocation();
 
   const isActive = (path) => {
@@ -54,8 +74,12 @@ export default function Navbar({ role, onLogout }) {
                 </>
               )}
             </div>
+          
+                  <button onClick={toggleTheme} className="p-2 text-slate-500 hover:text-primary-600 transition-colors rounded-full hover:bg-slate-100 ml-4 border border-slate-200">
+                    {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                  </button>
+            </div>
           </div>
-        </div>
       </div>
     </nav>
   );
