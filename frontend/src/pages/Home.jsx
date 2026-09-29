@@ -86,11 +86,11 @@ export default function Home() {
             </div>
 
             <div className="relative z-10 flex flex-col items-center justify-center text-center">
-              <h3 className="text-3xl font-black font-heading text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-2 uppercase tracking-widest">
-                Welcome, Builder
+              <h3 className="text-3xl font-black font-heading text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-2">
+                Ready to build?
               </h3>
-              <p className="text-text-muted font-mono text-sm uppercase tracking-widest">
-                System Initialized. Ready to Hack.
+              <p className="text-text-muted font-medium">
+                Turn caffeine into code. 72 hours on the clock.
               </p>
             </div>
           </div>
