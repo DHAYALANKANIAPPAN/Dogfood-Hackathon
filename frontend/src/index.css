@@ -10,14 +10,14 @@
   --color-secondary-500: #FF3D6E; /* Pink/Red */
   --color-secondary-600: #FF3D6E;
   
-  --color-bg-dark: #0B1020;
-  --color-bg-darker: #0E1428;
-  --color-bg-card: #1B2540;
-  --color-bg-card-hover: #26355C;
+  --color-bg-dark: #FFFFFF;
+  --color-bg-darker: #F8FAFC;
+  --color-bg-card: #E2E8F0;
+  --color-bg-card-hover: #CBD5E1;
   
-  --color-text-main: #E6ECFF;
-  --color-text-muted: #AEBAD6;
-  --color-text-darker: #6B7A9E;
+  --color-text-main: #0B1020;
+  --color-text-muted: #334155;
+  --color-text-darker: #64748B;
   
   --font-sans: 'Syne', sans-serif;
   --font-heading: 'Archivo Black', sans-serif;
