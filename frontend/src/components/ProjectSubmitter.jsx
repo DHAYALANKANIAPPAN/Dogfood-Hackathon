@@ -52,7 +52,7 @@ export default function ProjectSubmitter({ token }) {
   };
 
   return (
-    <div className="bg-bg-darker p-6 rounded-2xl border border-slate-200 space-y-6">
+    <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-6">
       <h3 className="font-medium text-lg mb-4 flex items-center gap-2 text-slate-900">
         <Code2 className="w-5 h-5 text-primary-600"/> Project Submission
       </h3>

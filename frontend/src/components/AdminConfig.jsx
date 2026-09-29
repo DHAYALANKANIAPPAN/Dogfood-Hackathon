@@ -40,11 +40,11 @@ export default function AdminConfig() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-2">Hackathon Name</label>
-                <input type="text" defaultValue="Dogfood 2026" className="block w-full px-4 py-3 bg-bg-darker border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
+                <input type="text" defaultValue="Dogfood 2026" className="block w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-2">Organizer</label>
-                <input type="text" defaultValue="raptors.dev" className="block w-full px-4 py-3 bg-bg-darker border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
+                <input type="text" defaultValue="raptors.dev" className="block w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
               </div>
             </div>
           </div>
@@ -57,21 +57,21 @@ export default function AdminConfig() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Registration Opens</label>
-                  <input type="datetime-local" defaultValue="2026-08-24T00:00" className="block w-full px-4 py-3 bg-bg-darker border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
+                  <input type="datetime-local" defaultValue="2026-08-24T00:00" className="block w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Team Formation</label>
-                  <input type="datetime-local" defaultValue="2026-09-21T00:00" className="block w-full px-4 py-3 bg-bg-darker border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
+                  <input type="datetime-local" defaultValue="2026-09-21T00:00" className="block w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Hackathon Starts</label>
-                  <input type="datetime-local" defaultValue="2026-09-25T18:00" className="block w-full px-4 py-3 bg-bg-darker border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
+                  <input type="datetime-local" defaultValue="2026-09-25T18:00" className="block w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Hackathon Ends (Deadline)</label>
-                  <input type="datetime-local" defaultValue="2026-09-28T18:00" className="block w-full px-4 py-3 bg-bg-darker border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
+                  <input type="datetime-local" defaultValue="2026-09-28T18:00" className="block w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-red-500/50 outline-none transition-all" />
                 </div>
               </div>
             </div>
@@ -91,7 +91,7 @@ export default function AdminConfig() {
 
           <div className="space-y-4">
             {tracks.map((track, index) => (
-              <div key={track.id} className="p-5 bg-bg-darker border border-slate-200 rounded-2xl relative group">
+              <div key={track.id} className="p-5 bg-white border border-slate-200 rounded-2xl relative group">
                 <button 
                   onClick={() => removeTrack(track.id)}
                   className="absolute top-2 right-2 p-2 text-slate-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all rounded-lg hover:bg-slate-100"

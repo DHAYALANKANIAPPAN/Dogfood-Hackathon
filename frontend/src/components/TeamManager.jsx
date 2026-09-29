@@ -39,7 +39,7 @@ export default function TeamManager({ token }) {
   };
 
   return (
-    <div className="bg-bg-darker p-6 rounded-2xl border border-slate-200 space-y-6">
+    <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-6">
       <div>
         <h3 className="font-medium text-lg mb-4 flex items-center gap-2 text-slate-900"><Plus className="w-5 h-5 text-primary-600"/> Create a Team</h3>
         <input type="text" placeholder="Team Name" value={teamName} onChange={e=>setTeamName(e.target.value)} className="w-full bg-slate-100 border border-slate-200 rounded-lg px-4 py-2 mb-3 text-slate-900 focus:outline-none focus:border-primary-500 transition-colors"/>
