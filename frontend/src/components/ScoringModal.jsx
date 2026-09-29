@@ -28,8 +28,8 @@ export default function ScoringModal({ assignment, token, onClose, onSuccess }) 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-bg-dark border border-slate-200 rounded-3xl w-full max-w-md overflow-hidden shadow-2xl">
-        <div className="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-100">
+      <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-md overflow-hidden shadow-2xl">
+        <div className="p-6 border-b border-slate-200 flex justify-between items-center bg-white">
           <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
             <Star className="w-5 h-5 text-yellow-400" /> Score Project
           </h3>
@@ -38,7 +38,7 @@ export default function ScoringModal({ assignment, token, onClose, onSuccess }) 
           </button>
         </div>
         
-        <div className="p-6 space-y-6 bg-bg-darker">
+        <div className="p-6 space-y-6 bg-white">
           <div>
             <h4 className="text-lg font-bold text-slate-900">{assignment.name}</h4>
             <p className="text-sm text-slate-600 mt-1">Submitted by {assignment.team}</p>
@@ -63,11 +63,11 @@ export default function ScoringModal({ assignment, token, onClose, onSuccess }) 
           </div>
         </div>
 
-        <div className="p-6 border-t border-slate-200 bg-slate-100">
+        <div className="p-6 border-t border-slate-200 bg-slate-50">
           <button 
             disabled={isSubmitting}
             onClick={handleSubmit} 
-            className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-slate-900 rounded-xl font-bold shadow-lg shadow-blue-500/20 transition-all flex justify-center items-center gap-2"
+            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-lg shadow-blue-500/20 transition-all flex justify-center items-center gap-2"
           >
             <CheckCircle className="w-5 h-5" /> {isSubmitting ? 'Submitting...' : 'Confirm Scores'}
           </button>
