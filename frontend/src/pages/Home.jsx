@@ -15,9 +15,6 @@ export default function Home() {
         <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6 tracking-tight neon-text">
           <span className="text-primary-500">Dogfood</span> <span className="text-secondary-500">Hackathon</span>
         </h1>
-        <p className="text-xl text-text-muted max-w-2xl mx-auto leading-relaxed font-mono-vt tracking-widest uppercase">
-          Build the platform that will judge you.
-        </p>
       </motion.div>
     </div>
   );
