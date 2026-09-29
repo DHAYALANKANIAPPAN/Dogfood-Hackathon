@@ -76,22 +76,22 @@ export default function Home() {
           {/* Abstract shadow/glow behind the card */}
           <div className="absolute inset-0 bg-gradient-to-tr from-primary-500/20 via-transparent to-secondary-500/20 rounded-3xl transform rotate-3 scale-105 blur-xl -z-10" />
           
-          <div className="bg-bg-darker/80 backdrop-blur-xl border border-bg-card shadow-2xl p-10 rounded-2xl relative overflow-hidden group hover:border-primary-500/50 transition-colors duration-500 min-h-[400px] flex flex-col items-center justify-center">
-            {/* Background Dog Watermark */}
-            <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.06] pointer-events-none scale-150 group-hover:scale-110 transition-transform duration-1000">
+          <div className="bg-white border border-slate-200 shadow-2xl p-12 rounded-2xl relative overflow-hidden group hover:border-primary-500/30 transition-colors duration-500 min-h-[400px] flex items-center justify-center">
+            {/* Corner Accents */}
+            <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-primary-500 rounded-tl-xl opacity-50 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-secondary-500 rounded-br-xl opacity-50 group-hover:opacity-100 transition-opacity" />
+            
+            {/* Faint Animated Dog Watermark */}
+            <div className="absolute inset-0 z-0 flex items-center justify-center opacity-10 pointer-events-none scale-[2.0] group-hover:scale-[2.1] transition-transform duration-700">
               <AnimatedDog />
             </div>
 
-            {/* Corner Accents */}
-            <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-primary-500 rounded-tl-xl opacity-50 group-hover:opacity-100 transition-opacity z-10" />
-            <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-secondary-500 rounded-br-xl opacity-50 group-hover:opacity-100 transition-opacity z-10" />
-            
             <div className="relative z-10 flex flex-col items-center justify-center text-center">
-              <h3 className="text-4xl font-black font-heading text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-4">
+              <h3 className="text-4xl font-black font-heading text-slate-800 mb-3 tracking-tight">
                 Ready to build?
               </h3>
-              <p className="text-text-muted font-medium text-lg max-w-[250px] leading-relaxed">
-                Turn caffeine into code. 72 hours on the clock.
+              <p className="text-slate-600 font-medium text-lg max-w-[80%]">
+                Turn caffeine into code.<br/>72 hours on the clock.
               </p>
             </div>
           </div>
