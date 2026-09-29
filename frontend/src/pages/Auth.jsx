@@ -1,20 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Mail, Lock, User, Code2, Dog, ArrowRight, Calendar, MapPin, Trophy, Target } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedDog from '../components/AnimatedDog';
 
 export default function Auth({ setRole }) {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const initialMode = searchParams.get('mode');
-  
-  const [isLogin, setIsLogin] = useState(initialMode !== 'register');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setIsLogin(initialMode !== 'register');
-  }, [initialMode]);
 
   const handleAuth = async (e) => {
     e.preventDefault();
@@ -22,60 +13,27 @@ export default function Auth({ setRole }) {
     const password = e.target.password.value;
 
     try {
-      if (isLogin) {
-        const formData = new URLSearchParams();
-        formData.append('username', email);
-        formData.append('password', password);
+      const formData = new URLSearchParams();
+      formData.append('username', email);
+      formData.append('password', password);
 
-        const response = await fetch('http://localhost:8000/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: formData.toString()
-        });
+      const response = await fetch('http://localhost:8000/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString()
+      });
 
-        if (!response.ok) throw new Error('Login failed');
-        
-        const data = await response.json();
-        localStorage.setItem('access_token', data.access_token);
-        const payload = JSON.parse(atob(data.access_token.split('.')[1]));
-        let decodedRole = String(payload.role).toLowerCase();
-        if (decodedRole.includes('admin')) decodedRole = 'admin';
-        else if (decodedRole.includes('judge')) decodedRole = 'judge';
-        else if (decodedRole.includes('participant')) decodedRole = 'participant';
-        setRole(decodedRole);
-        navigate('/dashboard');
-      } else {
-        const fullName = e.target.fullName.value;
-        let determinedRole = 'participant';
-        if (email.includes('admin')) determinedRole = 'admin';
-        else if (email.includes('judge')) determinedRole = 'judge';
-
-        const response = await fetch('http://localhost:8000/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, full_name: fullName, role: determinedRole })
-        });
-
-        if (!response.ok) throw new Error('Registration failed');
-        
-        const formData = new URLSearchParams();
-        formData.append('username', email);
-        formData.append('password', password);
-        const loginRes = await fetch('http://localhost:8000/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: formData.toString()
-        });
-        const data = await loginRes.json();
-        localStorage.setItem('access_token', data.access_token);
-        const payload = JSON.parse(atob(data.access_token.split('.')[1]));
-        let decodedRole = String(payload.role).toLowerCase();
-        if (decodedRole.includes('admin')) decodedRole = 'admin';
-        else if (decodedRole.includes('judge')) decodedRole = 'judge';
-        else if (decodedRole.includes('participant')) decodedRole = 'participant';
-        setRole(decodedRole);
-        navigate('/dashboard');
-      }
+      if (!response.ok) throw new Error('Login failed');
+      
+      const data = await response.json();
+      localStorage.setItem('access_token', data.access_token);
+      const payload = JSON.parse(atob(data.access_token.split('.')[1]));
+      let decodedRole = String(payload.role).toLowerCase();
+      if (decodedRole.includes('admin')) decodedRole = 'admin';
+      else if (decodedRole.includes('judge')) decodedRole = 'judge';
+      else if (decodedRole.includes('participant')) decodedRole = 'participant';
+      setRole(decodedRole);
+      navigate('/dashboard');
     } catch (error) {
       console.error('Auth error:', error);
       alert('Authentication failed. Make sure the backend server is running on port 8000.');
@@ -159,31 +117,20 @@ export default function Auth({ setRole }) {
         <div className="md:w-1/2 p-12 bg-slate-100 relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
-              key={isLogin ? 'login' : 'register'}
+              key="login"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
             >
               <h2 className="text-3xl font-heading font-semibold text-primary-600 mb-2">
-                {isLogin ? 'Welcome back' : 'Create an account'}
+                Welcome back
               </h2>
               <p className="text-slate-600 mb-8 text-sm">
-                {isLogin ? 'Enter your details to sign in to your account' : 'Sign up to register for the hackathon'}
+                Enter your details to sign in to your account
               </p>
 
               <form onSubmit={handleAuth} className="space-y-5">
-                {!isLogin && (
-                  <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>
-                    <label className="block text-sm font-medium text-slate-600 mb-1.5">Full Name</label>
-                    <div className="relative group">
-                      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                        <User className="w-5 h-5 text-slate-500 group-focus-within:text-primary-600 transition-colors" />
-                      </div>
-                      <input name="fullName" type="text" required placeholder="Jane Doe" className="block w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm" />
-                    </div>
-                  </motion.div>
-                )}
                 
                 <div>
                   <label className="block text-sm font-medium text-slate-600 mb-1.5">Email Address</label>
@@ -209,7 +156,7 @@ export default function Auth({ setRole }) {
                   type="submit" 
                   className="w-full py-3 mt-6 bg-primary-600 hover:bg-primary-500 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 group text-sm"
                 >
-                  {isLogin ? 'Sign In' : 'Create Account'}
+                  Sign In
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </form>
@@ -217,12 +164,6 @@ export default function Auth({ setRole }) {
           </AnimatePresence>
 
           <div className="mt-8 text-center">
-            <button 
-              onClick={() => setIsLogin(!isLogin)} 
-              className="text-slate-600 hover:text-slate-900 text-sm transition-colors"
-            >
-              {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
-            </button>
             <div className="mt-6 p-4 bg-white border border-slate-200 rounded-xl inline-block text-left mx-auto">
               <p className="text-xs text-slate-500 leading-relaxed font-mono">
                 <strong className="text-slate-700 font-sans">Demo Accounts:</strong><br />
