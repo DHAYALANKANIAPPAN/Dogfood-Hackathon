@@ -90,7 +90,7 @@ export default function Home() {
                 Ready to build?
               </h3>
               <p className="text-text-muted font-medium">
-                Turn caffeine into code. 72 hours on the clock.
+                Turn caffeine into code. The clock is ticking.
               </p>
             </div>
           </div>
