@@ -48,8 +48,6 @@ export default function Navbar({ role, onLogout }) {
                   <button onClick={onLogout} className="text-secondary-500 hover:text-secondary-400 transition-colors uppercase tracking-widest">Logout</button>
                 </>
               ) : (
-                <>
-                  <Link to="/auth?mode=register" className={`transition-colors ${isActive('/auth?mode=register')}`}>Register</Link>
                   <Link to="/auth" className={`transition-colors ${isActive('/auth')}`}>Login</Link>
                 </>
               )}
