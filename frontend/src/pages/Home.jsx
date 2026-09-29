@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import AnimatedDog from '../components/AnimatedDog';
+import Rules from '../components/Rules';
 
 export default function Home({ role }) {
   return (
@@ -33,6 +34,12 @@ export default function Home({ role }) {
               >
                 Login
               </Link>
+              <Link 
+                to="/gallery"
+                className="px-8 py-3 bg-white border border-slate-300 hover:bg-slate-50 text-slate-900 rounded-md text-sm font-semibold transition-colors"
+              >
+                View Gallery
+              </Link>
             </>
           ) : (
             <Link 
@@ -44,6 +51,10 @@ export default function Home({ role }) {
           )}
         </div>
       </motion.div>
+      
+      <div className="w-full max-w-7xl mx-auto px-6 mt-16">
+        <Rules />
+      </div>
     </div>
   );
 }

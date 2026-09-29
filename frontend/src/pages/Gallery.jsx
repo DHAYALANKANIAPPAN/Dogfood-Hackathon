@@ -13,13 +13,11 @@ export default function Gallery({ role }) {
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     
-    // Fetch Projects
-    fetch('http://localhost:8000/api/data/projects', {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
+    // Fetch Projects (Public)
+    fetch('http://localhost:8000/api/data/public/projects')
       .then(res => res.json())
       .then(data => {
-        setProjects((data || []).filter(p => p.status !== 'Draft').map(p => ({
+        setProjects((data || []).map(p => ({
           ...p,
           tagline: p.description ? p.description.substring(0, 50) + '...' : 'Hackathon Project'
         })));

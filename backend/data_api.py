@@ -24,6 +24,18 @@ def get_public_teams(db: Session = Depends(get_db)):
         "members": [{"name": m.full_name} for m in t.members]
     } for t in teams]
 
+@router.get("/public/projects")
+def get_public_projects(db: Session = Depends(get_db)):
+    projects = db.query(models.ProjectSubmission).filter(models.ProjectSubmission.is_draft == False).options(joinedload(models.ProjectSubmission.team)).all()
+    return [{
+        "id": str(p.id),
+        "name": p.title,
+        "team": p.team.name if p.team else "Unknown",
+        "description": p.description,
+        "repo_url": p.repo_url,
+        "demo_url": p.demo_url
+    } for p in projects]
+
 @router.get("/public/problems")
 def get_public_problems(db: Session = Depends(get_db)):
     problems = db.query(models.ProblemStatement).order_by(models.ProblemStatement.created_at.desc()).all()
