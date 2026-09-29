@@ -67,7 +67,7 @@ export default function Auth({ setRole }) {
               <span className="text-primary-600">DOGFOOD</span> <span className="text-red-500">Hackathon 2026</span>
             </h1>
             <p className="text-slate-600 text-lg leading-relaxed mb-10">
-              Join the brightest minds to build the future. 72 hours of intense coding, collaboration, and innovation.
+              Join the brightest minds to build the future. Intense coding, collaboration, and innovation await.
             </p>
 
             {/* Event Details Grid */}

@@ -42,8 +42,8 @@ function App() {
           <Route path="/admin" element={role === 'admin' ? <Dashboard role={role} setRole={setRole} /> : <Navigate to="/" replace />} />
           <Route path="/judge" element={role === 'judge' ? <Dashboard role={role} setRole={setRole} /> : <Navigate to="/" replace />} />
           
-          <Route path="/gallery" element={<Gallery role={role} />} />
-          <Route path="/scoreboard" element={<Leaderboard />} />
+          <Route path="/gallery" element={(role === 'admin' || role === 'judge') ? <Gallery role={role} /> : <Navigate to="/auth" replace />} />
+          <Route path="/scoreboard" element={role ? <Leaderboard /> : <Navigate to="/auth" replace />} />
           <Route path="/users" element={role ? <PublicUsers /> : <Navigate to="/auth" replace />} />
           <Route path="/teams" element={role ? <PublicTeams /> : <Navigate to="/auth" replace />} />
           

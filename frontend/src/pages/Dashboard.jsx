@@ -76,8 +76,8 @@ export default function Dashboard({ role, setRole }) {
               <div className="flex items-center gap-3 bg-slate-50 rounded-2xl px-5 py-4 border border-slate-200">
                 <Calendar className="w-5 h-5 text-primary-600" />
                 <div>
-                  <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Time Remaining</p>
-                  <p className="font-semibold text-slate-800">72 Hours</p>
+                  <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Status</p>
+                  <p className="font-semibold text-slate-800">Live</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 bg-slate-50 rounded-2xl px-5 py-4 border border-slate-200">

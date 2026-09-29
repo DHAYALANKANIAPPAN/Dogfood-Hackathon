@@ -44,10 +44,12 @@ export default function Navbar({ role, onLogout }) {
                     <Link to="/users" className={`transition-colors ${isActive('/users')}`}>Users</Link>
                     <Link to="/teams" className={`transition-colors ${isActive('/teams')}`}>Teams</Link>
                     <Link to="/challenges" className={`transition-colors ${isActive('/challenges')}`}>Challenges</Link>
+                    <Link to="/scoreboard" className={`transition-colors ${isActive('/scoreboard')}`}>Scoreboard</Link>
                   </>
                 )}
-                <Link to="/gallery" className={`transition-colors ${isActive('/gallery')}`}>Gallery</Link>
-                <Link to="/scoreboard" className={`transition-colors ${isActive('/scoreboard')}`}>Scoreboard</Link>
+                {(role === 'admin' || role === 'judge') && (
+                  <Link to="/gallery" className={`transition-colors ${isActive('/gallery')}`}>Gallery</Link>
+                )}
               </div>
             </div>
           </div>
