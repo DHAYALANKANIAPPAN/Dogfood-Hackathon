@@ -59,7 +59,7 @@ export default function TeamsList({ role, token }) {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {teams.map(team => (
-          <div key={team.id} className="bg-bg-darker p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div key={team.id} className="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
             <div>
                 <div className="flex justify-between items-start mb-4">
                   <div>
@@ -68,7 +68,7 @@ export default function TeamsList({ role, token }) {
                         type="text" 
                         value={editName} 
                         onChange={(e) => setEditName(e.target.value)} 
-                        className="bg-bg-darker border border-slate-300 rounded px-2 py-1 text-slate-900 text-lg font-bold outline-none focus:border-primary-500 w-full mb-2"
+                        className="bg-white border border-slate-300 rounded px-2 py-1 text-slate-900 text-lg font-bold outline-none focus:border-primary-500 w-full mb-2"
                       />
                     ) : (
                       <h3 className="text-lg font-bold text-slate-900 leading-tight">{team.name}</h3>

@@ -50,7 +50,7 @@ export default function Gallery() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-bg-darker text-slate-900 font-sans selection:bg-primary-500 selection:text-black pb-20 relative overflow-x-hidden"
+      className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-primary-500 selection:text-black pb-20 relative overflow-x-hidden"
     >
       {/* Cyberpunk Background Effects */}
       <div className="absolute inset-0 z-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20" />

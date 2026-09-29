@@ -56,7 +56,7 @@ export default function AdminUsers({ users = [], setUsers }) {
             placeholder="Search users..." 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 pr-4 py-2 bg-bg-darker border border-slate-200 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-primary-500/50 outline-none w-full md:w-64"
+            className="pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-primary-500/50 outline-none w-full md:w-64"
           />
         </div>
       </div>
@@ -75,7 +75,7 @@ export default function AdminUsers({ users = [], setUsers }) {
             {filteredUsers.map(user => (
               <tr key={user.id} className="group hover:bg-slate-100 transition-colors">
                 <td className="py-4 flex items-center gap-3">
-                  <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`} alt={user.name} className="w-8 h-8 rounded-full bg-bg-darker" />
+                  <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`} alt={user.name} className="w-8 h-8 rounded-full bg-white" />
                   <span className="font-medium text-zinc-100">{user.name}</span>
                 </td>
                 <td className="py-4 text-slate-600 text-sm">{user.email}</td>
@@ -83,7 +83,7 @@ export default function AdminUsers({ users = [], setUsers }) {
                   <select 
                     value={user.role}
                     onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                    className="bg-bg-darker border border-slate-200 rounded-lg px-3 py-1.5 text-sm text-slate-900 outline-none focus:border-primary-500"
+                    className="bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-sm text-slate-900 outline-none focus:border-primary-500"
                   >
                     <option value="participant">Participant</option>
                     <option value="judge">Judge</option>
