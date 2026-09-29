@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import AnimatedDog from '../components/AnimatedDog';
-import { Activity, Code, Database } from 'lucide-react';
+import { Code, Database } from 'lucide-react';
 
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -54,10 +54,6 @@ export default function Home() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="flex-1 text-left w-full"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary-500/10 border border-primary-500/30 text-primary-500 text-xs font-mono font-bold uppercase tracking-widest mb-8">
-            <Activity className="w-4 h-4" /> [ SYSTEM: ONLINE ]
-          </div>
-          
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-heading font-black tracking-tighter mb-6 leading-[0.9]">
             <span className="block text-primary-500 drop-shadow-sm mb-2">DOGFOOD</span>
             <span className="block text-secondary-500 drop-shadow-sm">HACKATHON</span>
