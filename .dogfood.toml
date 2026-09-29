@@ -1,0 +1,14 @@
+name = "AutoJudge ML Platform"
+pitch = "Offline-first hackathon platform with ML-driven Z-Score normalization and Pairwise Elo ranking, built securely on Docker and FastAPI."
+
+[tiers]
+t1_core = true
+t2_judging = true
+t3_public = true
+t4_stretch = true
+
+[bonuses]
+normalization_proof = true
+pairwise_mode = true
+threat_model = true
+api_first = true
