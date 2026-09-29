@@ -34,7 +34,7 @@ function App() {
         <div className="relative z-10 flex flex-col min-h-screen">
           <Navbar role={role} onLogout={handleLogout} />
         <Routes>
-          <Route path="/" element={<Home role={role} />} />
+          <Route path="/" element={<Home />} />
           <Route path="/auth" element={!role ? <Auth setRole={setRole} /> : <Navigate to="/dashboard" replace />} />
           
           <Route path="/challenges" element={role ? <Challenges /> : <Navigate to="/auth" replace />} />
