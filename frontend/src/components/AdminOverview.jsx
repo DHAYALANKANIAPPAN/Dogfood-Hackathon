@@ -24,23 +24,28 @@ export default function AdminOverview({ users = [], projects = [] }) {
     }
   };
 
-  const handleExportCSV = () => {
+  const handleExportCSV = async () => {
     setIsExporting(true);
-    setTimeout(() => {
-      const headers = "id,name,role,status\n";
-      const rows = users.map(u => `${u.id},${u.name},${u.role},Active`).join('\n');
-      const csvContent = "data:text/csv;charset=utf-8," + headers + rows;
+    try {
+      const token = localStorage.getItem('access_token');
+      const res = await fetch('http://localhost:8000/api/data/export/users', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error('Failed to export CSV');
       
-      const encodedUri = encodeURI(csvContent);
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "dogfood_hackathon_export.csv");
+      link.href = url;
+      link.setAttribute("download", "dogfood_hackathon_users_export.csv");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
+    } catch (error) {
+      alert('Error exporting data: ' + error.message);
+    } finally {
       setIsExporting(false);
-    }, 1000);
+    }
   };
 
   // Analytics Data Preparation

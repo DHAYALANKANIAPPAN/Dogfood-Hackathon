@@ -1,4 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import PlainTextResponse
+import csv
+import io
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import joinedload
 from uuid import UUID
@@ -107,3 +110,36 @@ def get_teams(db: Session = Depends(get_db), current_user: models.User = Depends
 def get_tracks(db: Session = Depends(get_db)):
     tracks = db.query(models.Track).all()
     return [{"id": str(t.id), "name": t.name, "description": t.description} for t in tracks]
+
+
+# --- EXPORT ENDPOINTS (T2 & T4 Core Requirements) ---
+
+@router.get("/export/users", response_class=PlainTextResponse)
+def export_users_csv(db: Session = Depends(get_db), current_user: models.User = Depends(allow_admins_only)):
+    users = db.query(models.User).all()
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(["ID", "Email", "Full Name", "Role", "Team ID"])
+    for u in users:
+        writer.writerow([str(u.id), u.email, u.full_name, u.role.value, str(u.team_id) if u.team_id else ""])
+    return PlainTextResponse(output.getvalue(), media_type="text/csv", headers={"Content-Disposition": "attachment; filename=users_export.csv"})
+
+@router.get("/export/projects", response_class=PlainTextResponse)
+def export_projects_csv(db: Session = Depends(get_db), current_user: models.User = Depends(allow_admins_only)):
+    projects = db.query(models.ProjectSubmission).all()
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(["ID", "Team ID", "Track ID", "Title", "Status", "Repo URL"])
+    for p in projects:
+        writer.writerow([str(p.id), str(p.team_id), str(p.track_id), p.title, "Draft" if p.is_draft else "Submitted", p.repo_url])
+    return PlainTextResponse(output.getvalue(), media_type="text/csv", headers={"Content-Disposition": "attachment; filename=projects_export.csv"})
+
+@router.get("/export/assignments", response_class=PlainTextResponse)
+def export_assignments_csv(db: Session = Depends(get_db), current_user: models.User = Depends(allow_admins_only)):
+    assignments = db.query(models.JudgeAssignment).all()
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(["Assignment ID", "Judge ID", "Submission ID", "Is Submitted", "Normalized Score"])
+    for a in assignments:
+        writer.writerow([str(a.id), str(a.judge_id), str(a.submission_id), str(a.is_submitted), str(a.normalized_score) if a.normalized_score else ""])
+    return PlainTextResponse(output.getvalue(), media_type="text/csv", headers={"Content-Disposition": "attachment; filename=judging_export.csv"})

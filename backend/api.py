@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, status, BackgroundTasks
 from sqlalchemy.orm import Session
 from uuid import UUID
+from datetime import datetime, timezone
 
 import models, schemas
 from database import get_db
@@ -132,7 +133,15 @@ def submit_project(
     db: Session = Depends(get_db), 
     current_user: models.User = Depends(allow_all_authenticated)
 ):
+
+    # RULE T1: Deadline enforcement that actually holds
+    event = db.query(models.Event).first()
+    if event and event.end_date:
+        if datetime.now(timezone.utc) > event.end_date.replace(tzinfo=timezone.utc):
+            raise HTTPException(status_code=400, detail="Hackathon deadline has passed. Submissions are locked.")
+            
     if not current_user.team_id:
+
         raise HTTPException(status_code=400, detail="Must be part of a team to submit")
     
     existing_sub = db.query(models.ProjectSubmission).filter(models.ProjectSubmission.team_id == current_user.team_id).first()
