@@ -12,6 +12,7 @@ export default function Auth({ setRole }) {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+    try {
       const formData = new URLSearchParams();
       formData.append('username', email);
       formData.append('password', password);

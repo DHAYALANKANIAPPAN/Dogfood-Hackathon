@@ -49,7 +49,6 @@ export default function Navbar({ role, onLogout }) {
                 </>
               ) : (
                   <Link to="/auth" className={`transition-colors ${isActive('/auth')}`}>Login</Link>
-                </>
               )}
             </div>
           </div>
