@@ -42,7 +42,7 @@ function App() {
           <Route path="/admin" element={role === 'admin' ? <Dashboard role={role} setRole={setRole} /> : <Navigate to="/" replace />} />
           <Route path="/judge" element={role === 'judge' ? <Dashboard role={role} setRole={setRole} /> : <Navigate to="/" replace />} />
           
-          <Route path="/gallery" element={(role === 'admin' || role === 'judge') ? <Gallery /> : <Navigate to="/" replace />} />
+          <Route path="/gallery" element={(role === 'admin' || role === 'judge') ? <Gallery role={role} /> : <Navigate to="/" replace />} />
           <Route path="/scoreboard" element={<Leaderboard />} />
           <Route path="/users" element={role ? <PublicUsers /> : <Navigate to="/auth" replace />} />
           <Route path="/teams" element={role ? <PublicTeams /> : <Navigate to="/auth" replace />} />

@@ -2,13 +2,18 @@ import { useState, useEffect } from 'react';
 import { Search, Code2, Play, GitBranch, ExternalLink, Star, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import ScoringModal from '../components/ScoringModal';
 
-export default function Gallery() {
+export default function Gallery({ role }) {
   const [search, setSearch] = useState('');
   const [projects, setProjects] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  const [scoringAssignment, setScoringAssignment] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
+    
+    // Fetch Projects
     fetch('http://localhost:8000/api/data/projects', {
       headers: { 'Authorization': `Bearer ${token}` }
     })
@@ -16,18 +21,25 @@ export default function Gallery() {
       .then(data => {
         setProjects((data || []).filter(p => p.status !== 'Draft').map(p => ({
           ...p,
-          tagline: p.description ? p.description.substring(0, 50) + '...' : 'Hackathon Project',
-          image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800&h=400',
-          track: 'Main Track'
+          tagline: p.description ? p.description.substring(0, 50) + '...' : 'Hackathon Project'
         })));
       })
       .catch(err => console.error(err));
-  }, []);
+
+    // Fetch Assignments if Judge
+    if (role === 'judge') {
+      fetch('http://localhost:8000/api/data/assignments', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+        .then(res => res.json())
+        .then(data => setAssignments(data || []))
+        .catch(err => console.error(err));
+    }
+  }, [role]);
 
   const filteredProjects = projects.filter(p => 
     p.name.toLowerCase().includes(search.toLowerCase()) || 
-    p.tagline.toLowerCase().includes(search.toLowerCase()) ||
-    p.track.toLowerCase().includes(search.toLowerCase())
+    p.tagline.toLowerCase().includes(search.toLowerCase())
   );
 
   const containerVariants = {
@@ -133,21 +145,7 @@ export default function Gallery() {
               key={project.id} 
               className="glass-panel neon-border p-0 flex flex-col group"
             >
-              <div className="h-64 overflow-hidden relative">
-                <img 
-                  src={project.image} 
-                  alt={project.name} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-darker via-bg-darker/80 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
-                <div className="absolute bottom-4 left-6 flex items-center gap-3">
-                  <span className="px-3 py-1 bg-black/60 border border-primary-500/50 text-xs font-mono font-bold text-primary-600 uppercase tracking-widest shadow-[0_0_10px_rgba(0,240,255,0.3)]">
-                    {project.track}
-                  </span>
-                </div>
-              </div>
-              
-              <div className="p-8 flex-1 flex flex-col relative z-10 -mt-10">
+              <div className="p-8 flex-1 flex flex-col relative z-10">
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div>
                     <h3 className="text-2xl font-heading font-bold text-slate-900 mb-1 group-hover:text-primary-600 transition-colors uppercase tracking-tight">{project.name}</h3>
@@ -178,14 +176,37 @@ export default function Gallery() {
                     </div>
                     <span className="text-xs font-mono font-bold text-primary-800 uppercase tracking-widest">{project.team}</span>
                   </div>
-                  <a href="#" className="text-xs font-mono font-bold text-secondary-500 hover:text-secondary-400 transition-colors flex items-center gap-1 group/link uppercase tracking-widest">
-                    Access <ExternalLink className="w-3 h-3 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
-                  </a>
+                  <div className="flex items-center gap-4">
+                    {role === 'judge' && (() => {
+                      const assignment = assignments.find(a => a.project_id === project.id);
+                      if (!assignment) return null;
+                      return assignment.is_submitted ? (
+                        <span className="text-green-600 text-xs font-bold px-3 py-1 bg-green-50 border border-green-200 rounded">Scored: {assignment.score}</span>
+                      ) : (
+                        <button onClick={() => setScoringAssignment(assignment)} className="text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 px-3 py-1 rounded transition-colors shadow-md">Score Project</button>
+                      );
+                    })()}
+                    <a href="#" className="text-xs font-mono font-bold text-secondary-500 hover:text-secondary-400 transition-colors flex items-center gap-1 group/link uppercase tracking-widest">
+                      Access <ExternalLink className="w-3 h-3 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
+        
+        {scoringAssignment && (
+          <ScoringModal 
+            assignment={scoringAssignment} 
+            token={localStorage.getItem('access_token')}
+            onClose={() => setScoringAssignment(null)}
+            onSuccess={(assignmentId, finalScore) => {
+              setAssignments(assignments.map(a => a.assignment_id === assignmentId ? { ...a, is_submitted: true, score: finalScore } : a));
+              setScoringAssignment(null);
+            }}
+          />
+        )}
         
         {filteredProjects.length === 0 && (
           <motion.div 
