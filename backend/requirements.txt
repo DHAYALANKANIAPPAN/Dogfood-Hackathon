@@ -13,3 +13,4 @@ slowapi
 PyYAML
 httpx
 email-validator
+pytest

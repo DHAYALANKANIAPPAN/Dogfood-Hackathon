@@ -1,0 +1,32 @@
+DOGFOOD 2026 - ACCEPTANCE REPORT
+Team: Dhaya, Santo, Bhava, Ling
+
+[PASS] TIER 1 - CORE
+- Local JWT Authentication and Role Isolation implemented natively.
+- Event, Track, and configurable dates implemented.
+- Team formation via secure invite links implemented.
+- Project submission with `is_draft` state implemented.
+
+[PASS] TIER 2 - JUDGING
+- Algorithmic load-balanced round-robin judge assignment implemented.
+- Configurable weighted rubrics stored as dynamic JSON.
+- Cross-judge Z-Score normalization implemented (fixes biased scoring mathematically).
+
+[PASS] TIER 3 - PUBLIC
+- Community voting protected by offline IP-based rate limiting (`slowapi`).
+- Hidden result states enforced via FastAPI `RoleChecker` dependencies.
+
+[PASS] TIER 4 - STRETCH
+- Webhook dispatcher (async HTTP background tasks) implemented.
+- Cryptographic Judge Participation Records (HMAC-SHA256 signatures) implemented.
+
+[CLAIMED] BONUS CHALLENGES (+16/16 Points)
+- Normalization Proof (+5): See `backend/algorithms/normalization_proof.py`.
+- Pairwise Mode (+5): Bradley-Terry Elo estimator available in `backend/algorithms/pairwise.py`.
+- Threat Model (+3): See `THREAT-MODEL.md`.
+- API First (+3): Swagger spec extracted to `swagger.yaml`.
+
+DEPLOYMENT COMPLIANCE
+- [X] Runs perfectly via single command `docker compose up`.
+- [X] Uses Fixture Data seed script (`seed.py`).
+- [X] ZERO external cloud dependencies, external APIs, or network requirements.
