@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import AnimatedDog from '../components/AnimatedDog';
-import Rules from '../components/Rules';
 
 export default function Home({ role }) {
   return (
@@ -53,10 +52,6 @@ export default function Home({ role }) {
           )}
         </div>
       </motion.div>
-      
-      <div className="w-full max-w-7xl mx-auto px-6 mt-16">
-        <Rules />
-      </div>
     </div>
   );
 }
