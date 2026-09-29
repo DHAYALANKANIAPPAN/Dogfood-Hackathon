@@ -85,17 +85,13 @@ export default function Home() {
               <AnimatedDog />
             </div>
 
-            <div className="grid grid-cols-2 gap-6 relative z-10">
-              <div className="flex flex-col items-center justify-center p-6 bg-bg-dark border border-bg-card rounded-xl hover:border-primary-500 transition-colors shadow-sm">
-                <Database className="w-8 h-8 text-primary-500 mb-3" />
-                <span className="text-3xl font-black font-heading text-text-main">72h</span>
-                <span className="text-xs font-mono text-text-muted uppercase tracking-widest mt-1">Countdown</span>
-              </div>
-              <div className="flex flex-col items-center justify-center p-6 bg-bg-dark border border-bg-card rounded-xl hover:border-secondary-500 transition-colors shadow-sm">
-                <Code className="w-8 h-8 text-secondary-500 mb-3" />
-                <span className="text-3xl font-black font-heading text-text-main">OSI</span>
-                <span className="text-xs font-mono text-text-muted uppercase tracking-widest mt-1">License</span>
-              </div>
+            <div className="relative z-10 flex flex-col items-center justify-center text-center">
+              <h3 className="text-3xl font-black font-heading text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-secondary-500 mb-2 uppercase tracking-widest">
+                Welcome, Builder
+              </h3>
+              <p className="text-text-muted font-mono text-sm uppercase tracking-widest">
+                System Initialized. Ready to Hack.
+              </p>
             </div>
           </div>
         </motion.div>
