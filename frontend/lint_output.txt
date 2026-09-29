@@ -1,0 +1,412 @@
+
+> frontend@0.0.0 lint
+> oxlint
+
+
+  x Adjacent JSX elements must be wrapped in an enclosing tag.
+    ,-[src/components/Navbar.jsx:52:17]
+ 51 |                   <Link to="/auth" className={`transition-colors ${isActive('/auth')}`}>Login</Link>
+ 52 |                 </>
+    :                 ^
+ 53 |               )}
+    `----
+  help: Did you want a JSX fragment `<>...</>`?
+
+  ! eslint(no-unused-vars): Identifier 'Terminal' is imported but never used.
+   ,-[src/pages/Challenges.jsx:2:10]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { Terminal, CheckCircle2, AlertTriangle, FileCode } from 'lucide-react';
+   :          ^^^^|^^^
+   :              `-- 'Terminal' is imported here
+ 3 | 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'CheckCircle2' is imported but never used.
+   ,-[src/pages/Challenges.jsx:2:20]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { Terminal, CheckCircle2, AlertTriangle, FileCode } from 'lucide-react';
+   :                    ^^^^^^|^^^^^
+   :                          `-- 'CheckCircle2' is imported here
+ 3 | 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'AlertTriangle' is imported but never used.
+   ,-[src/pages/Challenges.jsx:2:34]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { Terminal, CheckCircle2, AlertTriangle, FileCode } from 'lucide-react';
+   :                                  ^^^^^^|^^^^^^
+   :                                        `-- 'AlertTriangle' is imported here
+ 3 | 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'FileCode' is imported but never used.
+   ,-[src/pages/Challenges.jsx:2:49]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { Terminal, CheckCircle2, AlertTriangle, FileCode } from 'lucide-react';
+   :                                                 ^^^^|^^^
+   :                                                     `-- 'FileCode' is imported here
+ 3 | 
+   `----
+  help: Consider removing this import.
+
+  x Expected a semicolon or an implicit semicolon after a statement, but found none
+    ,-[src/pages/Auth.jsx:36:6]
+ 35 |       navigate('/dashboard');
+ 36 |     } catch (error) {
+    :      ^
+ 37 |       console.error('Auth error:', error);
+    `----
+  help: Try inserting a semicolon here
+
+  ! react(purity): Cannot call impure function during render
+     ,-[src/pages/Home.jsx:110:16]
+ 109 |           initial={{ 
+ 110 |             x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000), 
+     :                ^^^^^^|^^^^^^
+     :                      `-- Cannot call impure function
+ 111 |             y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+     `----
+  help: `Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component re-renders
+  note: React Compiler skipped optimizing this component or hook. Additional guidance: https://react.dev/reference/eslint-plugin-react-hooks/lints/purity
+
+  ! react(purity): Cannot call impure function during render
+     ,-[src/pages/Home.jsx:111:16]
+ 110 |             x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000), 
+ 111 |             y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+     :                ^^^^^^|^^^^^^
+     :                      `-- Cannot call impure function
+ 112 |             opacity: Math.random() * 0.5 + 0.2,
+     `----
+  help: `Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component re-renders
+  note: React Compiler skipped optimizing this component or hook. Additional guidance: https://react.dev/reference/eslint-plugin-react-hooks/lints/purity
+
+  ! react(purity): Cannot call impure function during render
+     ,-[src/pages/Home.jsx:112:22]
+ 111 |             y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+ 112 |             opacity: Math.random() * 0.5 + 0.2,
+     :                      ^^^^^^|^^^^^^
+     :                            `-- Cannot call impure function
+ 113 |             scale: Math.random() * 0.5 + 0.5
+     `----
+  help: `Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component re-renders
+  note: React Compiler skipped optimizing this component or hook. Additional guidance: https://react.dev/reference/eslint-plugin-react-hooks/lints/purity
+
+  ! react(purity): Cannot call impure function during render
+     ,-[src/pages/Home.jsx:113:20]
+ 112 |             opacity: Math.random() * 0.5 + 0.2,
+ 113 |             scale: Math.random() * 0.5 + 0.5
+     :                    ^^^^^^|^^^^^^
+     :                          `-- Cannot call impure function
+ 114 |           }}
+     `----
+  help: `Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component re-renders
+  note: React Compiler skipped optimizing this component or hook. Additional guidance: https://react.dev/reference/eslint-plugin-react-hooks/lints/purity
+
+  ! react(purity): Cannot call impure function during render
+     ,-[src/pages/Home.jsx:121:23]
+ 120 |           transition={{
+ 121 |             duration: Math.random() * 8 + 7,
+     :                       ^^^^^^|^^^^^^
+     :                             `-- Cannot call impure function
+ 122 |             repeat: Infinity,
+     `----
+  help: `Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component re-renders
+  note: React Compiler skipped optimizing this component or hook. Additional guidance: https://react.dev/reference/eslint-plugin-react-hooks/lints/purity
+
+  ! eslint(no-unused-vars): Identifier 'Activity' is imported but never used.
+   ,-[src/pages/Leaderboard.jsx:3:32]
+ 2 | import { motion } from 'framer-motion';
+ 3 | import { Trophy, Medal, Award, Activity, Loader2 } from 'lucide-react';
+   :                                ^^^^|^^^
+   :                                    `-- 'Activity' is imported here
+ 4 | import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, CartesianGrid } from 'recharts';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Catch parameter 'error' is caught but never used.
+    ,-[src/components/AdminOverview.jsx:20:14]
+ 19 |       else alert(`Error: ${data.detail}`);
+ 20 |     } catch (error) {
+    :              ^^|^^
+    :                `-- 'error' is declared here
+ 21 |       alert('Failed to run algorithm.');
+    `----
+  help: Consider handling this error.
+
+  ! eslint(no-unused-vars): Catch parameter 'e' is caught but never used.
+    ,-[src/components/TeamsList.jsx:31:13]
+ 30 |       }
+ 31 |     } catch(e) {
+    :             |
+    :             `-- 'e' is declared here
+ 32 |       alert("Failed to delete team.");
+    `----
+  help: Consider handling this error.
+
+  ! eslint(no-unused-vars): Catch parameter 'e' is caught but never used.
+    ,-[src/components/TeamsList.jsx:50:13]
+ 49 |       }
+ 50 |     } catch(e) {
+    :             |
+    :             `-- 'e' is declared here
+ 51 |       alert("Failed to update team.");
+    `----
+  help: Consider handling this error.
+
+  ! eslint(no-unused-vars): Identifier 'Users' is imported but never used.
+   ,-[src/components/TeamManager.jsx:2:10]
+ 1 | import { useState } from 'react';
+ 2 | import { Users, Plus, LogIn } from 'lucide-react';
+   :          ^^|^^
+   :            `-- 'Users' is imported here
+ 3 | 
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Catch parameter 'e' is caught but never used.
+    ,-[src/components/TeamManager.jsx:21:13]
+ 20 |       }
+ 21 |     } catch(e) {
+    :             |
+    :             `-- 'e' is declared here
+ 22 |       alert("Error creating team.");
+    `----
+  help: Consider handling this error.
+
+  ! eslint(no-unused-vars): Catch parameter 'e' is caught but never used.
+    ,-[src/components/TeamManager.jsx:36:13]
+ 35 |       else alert(`Error: ${data.detail}`);
+ 36 |     } catch(e) {
+    :             |
+    :             `-- 'e' is declared here
+ 37 |       alert("Error joining team.");
+    `----
+  help: Consider handling this error.
+
+  ! eslint(no-unused-vars): Catch parameter 'err' is caught but never used.
+    ,-[src/components/ScoringModal.jsx:22:13]
+ 21 |       }
+ 22 |     } catch(err) {
+    :             ^|^
+    :              `-- 'err' is declared here
+ 23 |       alert("Failed to submit score.");
+    `----
+  help: Consider handling this error.
+
+  ! eslint(no-unused-vars): Parameter 'index' is declared but never used. Unused parameters should start with a '_'.
+    ,-[src/components/AdminConfig.jsx:93:33]
+ 92 |           <div className="space-y-4">
+ 93 |             {tracks.map((track, index) => (
+    :                                 ^^|^^
+    :                                   `-- 'index' is declared here
+ 94 |               <div key={track.id} className="p-5 bg-white border border-slate-200 rounded-2xl relative group">
+    `----
+  help: Consider removing this parameter.
+
+  ! eslint(no-unused-vars): Catch parameter 'err' is caught but never used.
+    ,-[src/components/ProjectSubmitter.jsx:47:13]
+ 46 |       }
+ 47 |     } catch(err) {
+    :             ^|^
+    :              `-- 'err' is declared here
+ 48 |       alert("Failed to submit project.");
+    `----
+  help: Consider handling this error.
+
+  ! eslint(no-unused-vars): Catch parameter 'e' is caught but never used.
+    ,-[src/components/AdminUsers.jsx:22:13]
+ 21 |       else alert('Failed to update role');
+ 22 |     } catch(e) {
+    :             |
+    :             `-- 'e' is declared here
+ 23 |       alert('Error updating role');
+    `----
+  help: Consider handling this error.
+
+  ! eslint(no-unused-vars): Catch parameter 'e' is caught but never used.
+    ,-[src/components/AdminUsers.jsx:37:15]
+ 36 |         else alert('Failed to delete user');
+ 37 |       } catch(e) {
+    :               |
+    :               `-- 'e' is declared here
+ 38 |         alert('Error deleting user');
+    `----
+  help: Consider handling this error.
+
+  ! react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders
+    ,-[src/components/AdminProblems.jsx:24:5]
+ 22 | 
+ 23 |   useEffect(() => {
+    :   ^^^^|^^^^
+    :       `-- This is the containing effect
+ 24 |     fetchProblems();
+    :     ^^^^^^|^^^^^^
+    :           `-- Avoid calling setState() directly within an effect
+ 25 |   }, []);
+    `----
+  help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+  note: React Compiler skipped optimizing this component or hook. Additional guidance: https://react.dev/reference/eslint-plugin-react-hooks/lints/set-state-in-effect
+
+  ! eslint(no-unused-vars): Identifier 'ChevronRight' is imported but never used.
+   ,-[src/components/Helpdesk.jsx:2:66]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { HelpCircle, MapPin, MessageSquare, Clock, CheckCircle2, ChevronRight, X, AlertCircle, Trash2 } from 'lucide-react';
+   :                                                                  ^^^^^^|^^^^^
+   :                                                                        `-- 'ChevronRight' is imported here
+ 3 | import { motion, AnimatePresence } from 'framer-motion';
+   `----
+  help: Consider removing this import.
+
+  ! react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders
+    ,-[src/components/Helpdesk.jsx:32:5]
+ 30 | 
+ 31 |   useEffect(() => {
+    :   ^^^^|^^^^
+    :       `-- This is the containing effect
+ 32 |     fetchRequests();
+    :     ^^^^^^|^^^^^^
+    :           `-- Avoid calling setState() directly within an effect
+ 33 |     const interval = setInterval(fetchRequests, 10000); // Polling every 10s
+    `----
+  help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+  note: React Compiler skipped optimizing this component or hook. Additional guidance: https://react.dev/reference/eslint-plugin-react-hooks/lints/set-state-in-effect
+
+  ! eslint(no-unused-vars): Identifier 'Code2' is imported but never used.
+   ,-[src/pages/Gallery.jsx:2:18]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { Search, Code2, Play, GitBranch, ExternalLink, Star, Users } from 'lucide-react';
+   :                  ^^|^^
+   :                    `-- 'Code2' is imported here
+ 3 | import { Link } from 'react-router-dom';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Link' is imported but never used.
+   ,-[src/pages/Gallery.jsx:3:10]
+ 2 | import { Search, Code2, Play, GitBranch, ExternalLink, Star, Users } from 'lucide-react';
+ 3 | import { Link } from 'react-router-dom';
+   :          ^^|^
+   :            `-- 'Link' is imported here
+ 4 | import { motion } from 'framer-motion';
+   `----
+  help: Consider removing this import.
+
+  ! react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders
+    ,-[src/components/Announcements.jsx:30:5]
+ 28 | 
+ 29 |   useEffect(() => {
+    :   ^^^^|^^^^
+    :       `-- This is the containing effect
+ 30 |     fetchAnnouncements();
+    :     ^^^^^^^^^|^^^^^^^^
+    :              `-- Avoid calling setState() directly within an effect
+ 31 |     const interval = setInterval(fetchAnnouncements, 10000);
+    `----
+  help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+  note: React Compiler skipped optimizing this component or hook. Additional guidance: https://react.dev/reference/eslint-plugin-react-hooks/lints/set-state-in-effect
+
+  ! eslint(no-unused-vars): Identifier 'LogOut' is imported but never used.
+   ,-[src/pages/Dashboard.jsx:2:10]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { LogOut, Calendar, MapPin, Code2, Dog, Users, Shield, Gavel, CheckCircle2, Image as ImageIcon, Trophy } from 'lucide-react';
+   :          ^^^|^^
+   :             `-- 'LogOut' is imported here
+ 3 | import { useNavigate, Link } from 'react-router-dom';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Code2' is imported but never used.
+   ,-[src/pages/Dashboard.jsx:2:36]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { LogOut, Calendar, MapPin, Code2, Dog, Users, Shield, Gavel, CheckCircle2, Image as ImageIcon, Trophy } from 'lucide-react';
+   :                                    ^^|^^
+   :                                      `-- 'Code2' is imported here
+ 3 | import { useNavigate, Link } from 'react-router-dom';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Dog' is imported but never used.
+   ,-[src/pages/Dashboard.jsx:2:43]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { LogOut, Calendar, MapPin, Code2, Dog, Users, Shield, Gavel, CheckCircle2, Image as ImageIcon, Trophy } from 'lucide-react';
+   :                                           ^|^
+   :                                            `-- 'Dog' is imported here
+ 3 | import { useNavigate, Link } from 'react-router-dom';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Shield' is imported but never used.
+   ,-[src/pages/Dashboard.jsx:2:55]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { LogOut, Calendar, MapPin, Code2, Dog, Users, Shield, Gavel, CheckCircle2, Image as ImageIcon, Trophy } from 'lucide-react';
+   :                                                       ^^^|^^
+   :                                                          `-- 'Shield' is imported here
+ 3 | import { useNavigate, Link } from 'react-router-dom';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'CheckCircle2' is imported but never used.
+   ,-[src/pages/Dashboard.jsx:2:70]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { LogOut, Calendar, MapPin, Code2, Dog, Users, Shield, Gavel, CheckCircle2, Image as ImageIcon, Trophy } from 'lucide-react';
+   :                                                                      ^^^^^^|^^^^^
+   :                                                                            `-- 'CheckCircle2' is imported here
+ 3 | import { useNavigate, Link } from 'react-router-dom';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'ImageIcon' is imported but never used.
+   ,-[src/pages/Dashboard.jsx:2:93]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { LogOut, Calendar, MapPin, Code2, Dog, Users, Shield, Gavel, CheckCircle2, Image as ImageIcon, Trophy } from 'lucide-react';
+   :                                                                                             ^^^^|^^^^
+   :                                                                                                 `-- 'ImageIcon' is imported here
+ 3 | import { useNavigate, Link } from 'react-router-dom';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Trophy' is imported but never used.
+   ,-[src/pages/Dashboard.jsx:2:104]
+ 1 | import { useState, useEffect } from 'react';
+ 2 | import { LogOut, Calendar, MapPin, Code2, Dog, Users, Shield, Gavel, CheckCircle2, Image as ImageIcon, Trophy } from 'lucide-react';
+   :                                                                                                        ^^^|^^
+   :                                                                                                           `-- 'Trophy' is imported here
+ 3 | import { useNavigate, Link } from 'react-router-dom';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Identifier 'Link' is imported but never used.
+   ,-[src/pages/Dashboard.jsx:3:23]
+ 2 | import { LogOut, Calendar, MapPin, Code2, Dog, Users, Shield, Gavel, CheckCircle2, Image as ImageIcon, Trophy } from 'lucide-react';
+ 3 | import { useNavigate, Link } from 'react-router-dom';
+   :                       ^^|^
+   :                         `-- 'Link' is imported here
+ 4 | import { motion, AnimatePresence } from 'framer-motion';
+   `----
+  help: Consider removing this import.
+
+  ! eslint(no-unused-vars): Parameter 'setRole' is declared but never used. Unused parameters should start with a '_'.
+    ,-[src/pages/Dashboard.jsx:17:43]
+ 16 | 
+ 17 | export default function Dashboard({ role, setRole }) {
+    :                                           ^^^|^^^
+    :                                              `-- 'setRole' is declared here
+ 18 |   const navigate = useNavigate();
+    `----
+  help: Consider removing this parameter.
+
+  ! eslint(no-unused-vars): Variable 'navigate' is declared but never used. Unused variables should start with a '_'.
+    ,-[src/pages/Dashboard.jsx:18:9]
+ 17 | export default function Dashboard({ role, setRole }) {
+ 18 |   const navigate = useNavigate();
+    :         ^^^^|^^^
+    :             `-- 'navigate' is declared here
+ 19 |   const [adminTab, setAdminTab] = useState('overview');
+    `----
+  help: Consider removing this declaration.
+
+Found 37 warnings and 2 errors.
+Finished in 98ms on 23 files with 104 rules using 12 threads.
